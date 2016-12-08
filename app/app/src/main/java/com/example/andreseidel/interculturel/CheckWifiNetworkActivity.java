@@ -32,7 +32,6 @@ public class CheckWifiNetworkActivity extends Activity {
         filter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
         final WifiManager wifiManager =
                 (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        ;
         registerReceiver(new BroadcastReceiver() {
 
             @SuppressLint("UseValueOf")
@@ -40,7 +39,7 @@ public class CheckWifiNetworkActivity extends Activity {
             public void onReceive(Context context, Intent intent) {
                 sb = new StringBuilder();
                 scanList = wifiManager.getScanResults();
-                sb.append("\n  Number Of Wifi connections :" + " " + scanList.size() + "\n\n");
+                sb.append("\n Number Of Wifi connections : " + " " + scanList.size() + "\n\n");
                 for (int i = 0; i < scanList.size(); i++) {
                     sb.append(new Integer(i + 1).toString() + ". ");
                     sb.append((scanList.get(i)).toString());

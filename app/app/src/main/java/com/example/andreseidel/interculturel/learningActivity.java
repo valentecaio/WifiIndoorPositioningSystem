@@ -26,7 +26,6 @@ public class learningActivity extends AppCompatActivity {
 
         tv = (TextView) findViewById(R.id.wifiStrength);
         mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        room = new Room("zoeira");
     }
 
     public void Back(View view) {

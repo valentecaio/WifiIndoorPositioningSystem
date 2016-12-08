@@ -29,8 +29,10 @@ public class Room {
     public String toString(){
         String str = "";
         for (RouterInRoom router : routers){
-            str = str + router.toString() + " -- " + router.getMean() + "\n";
+            str = str + router.toString() + " >> " + router.getMean() + "\n";
         }
         return str;
     }
+
+
 }
