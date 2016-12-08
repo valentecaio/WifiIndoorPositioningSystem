@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Interculturel</string>
+    <string name="title_activity_telecom_map">Map</string>
 </resources>
