@@ -26,6 +26,7 @@ public class learningActivity extends AppCompatActivity {
     WifiInfo info;
     TextView tv;
     List<Router> routers;
+    Room room;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,9 @@ public class learningActivity extends AppCompatActivity {
 
         tv = (TextView) findViewById(R.id.wifiStrength);
         mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-
+        Bundle bundle = getIntent().getExtras();
+        String message = bundle.getString("message");
+        room = new Room(message);
     }
 
 
@@ -53,10 +56,12 @@ public class learningActivity extends AppCompatActivity {
 
             String bssid = info.getBSSID();
             int rssi = info.getRssi();
-            Router r = new Router(bssid, rssi);
+            RouterInRoom r = new RouterInRoom(bssid, rssi);
 
-            routers.add(r);
-            //String data5 = wifiReciever.getResultData();
+            room.add(r);
+
+
+            ((TextView)findViewById(R.id.wifiStrength)).setText(room.toString());
         }
         catch (Exception e){
             tv.setText(""+ e.getLocalizedMessage());

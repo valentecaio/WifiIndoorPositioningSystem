@@ -30,7 +30,7 @@ public class showRoom extends AppCompatActivity {
     public void sendMessage(View view) {
         Intent intent = new Intent(this, learningActivity.class);
         TextView editText = (TextView) findViewById(R.id.roomName);
-
+        intent.putExtra("message", editText.toString());
         startActivity(intent);
     }
 

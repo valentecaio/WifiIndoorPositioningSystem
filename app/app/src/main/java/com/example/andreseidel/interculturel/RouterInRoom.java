@@ -23,4 +23,8 @@ public class RouterInRoom {
         mean = sumSamples/nSamples;
         return mean;
     }
+
+    public String toString(){
+        return name;
+    }
 }
