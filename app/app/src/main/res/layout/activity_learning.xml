@@ -36,12 +36,13 @@
         android:text="Save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/setName"
+        android:id="@+id/saveButton"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/back"
         android:layout_alignStart="@+id/back"
         android:layout_marginTop="37dp"
-        android:onClick="saveRoomData (LearningActivity)" />
+        android:elevation="0dp"
+        android:onClick="setName" />
 
     <Button
         android:text="Retry"
@@ -63,7 +64,7 @@
         android:ems="10"
         android:id="@+id/roomName"
         android:hint="Room Name"
-        android:layout_alignBottom="@+id/setName"
+        android:layout_alignBottom="@+id/saveButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

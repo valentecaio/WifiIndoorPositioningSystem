@@ -1,5 +1,6 @@
 package com.example.andreseidel.interculturel;
 
+import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
@@ -39,13 +40,13 @@ public class LearningActivity extends AppCompatActivity {
         startActivity(intent2);
     }
 
-    public void saveRoomData(View view) throws RoomWithoutNameException {
+    public void setName(View view) throws RoomWithoutNameException {
         // gets room name
         String name = roomName.getText().toString();
         this.room.setName(name);
 
         // exception if name is invalid
-        if(this.room.getName() == null || this.room.getName().isEmpty()){
+        if (this.room.getName() == null || this.room.getName().isEmpty()) {
             throw new RoomWithoutNameException();
         }
 
@@ -69,12 +70,12 @@ public class LearningActivity extends AppCompatActivity {
             room.add(r);
 
             tv.setText(room.toString());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             tv.setText("" + e.getLocalizedMessage());
         }
     }
 
     private void saveRoomsInfo() throws RoomWithoutNameException {
     }
+
 }
