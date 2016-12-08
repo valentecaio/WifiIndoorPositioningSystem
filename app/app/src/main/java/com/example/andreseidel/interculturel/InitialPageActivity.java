@@ -15,7 +15,6 @@ public class InitialPageActivity extends AppCompatActivity {
     EditText roomName;
     Button getStats;
     Button setStats;
-    List<Room> rooms = new ArrayList<Room>();
     AppFileManager fileManager;
 
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
