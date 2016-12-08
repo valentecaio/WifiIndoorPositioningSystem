@@ -75,7 +75,8 @@ public class LearningActivity extends AppCompatActivity {
             throw new RoomWithoutNameException();
         }
         IO.print(this, roomName.getText().toString());
-        String dataToWrite = this.room.toCSVString();
+        String dataToWrite = this.room.toCSV();
+        IO.print(dataToWrite);
 
         AppFileManager fileManager = new AppFileManager(this, this.room.getName());
         fileManager.write(dataToWrite);

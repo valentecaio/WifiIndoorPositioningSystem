@@ -10,6 +10,13 @@ public class RouterInRoom {
     private float mean;
     private String bssid;
 
+    // construtor to get data from CSV
+    public RouterInRoom(String bssid, int sumSamples, int nSamples) {
+        this.sumSamples = sumSamples;
+        this.nSamples = nSamples;
+        this.bssid = bssid;
+    }
+
     public RouterInRoom (String bssid, int rssi){
         this.bssid = bssid;
         this.sumSamples = rssi;
@@ -59,4 +66,11 @@ public class RouterInRoom {
     public void setBssid(String bssid) {
         this.bssid = bssid;
     }
+
+    public String toCSV(){
+        return this.getBssid() + ',' + this.getSumSamples() + ',' + this.getnSamples();
+    }
+
+
+
 }
