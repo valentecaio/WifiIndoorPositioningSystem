@@ -21,7 +21,6 @@ public class LearningActivity extends AppCompatActivity {
     List<Room> rooms;
     AppFileManager fileManager;
     Room room;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +30,13 @@ public class LearningActivity extends AppCompatActivity {
         mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
         rooms = new ArrayList<Room>();
-        room = new Room();
         //Bundle bundle = getIntent().getExtras();
         //String message = bundle.getString("message");
-        //room = new Room(message);
+        //room = new Room(message)
+        //
+        Room rm = new Room(roomName);
+        rooms.add(rm);
+        ;
     }
 
     public void Back(View view) {
@@ -46,8 +48,8 @@ public class LearningActivity extends AppCompatActivity {
         EditText edText = (EditText)findViewById(R.id.roomName);
         String roomName = edText.getText().toString();
 
-        room.setName(roomName);
-        rooms.add(room);
+        Room rm = new Room(roomName);
+        rooms.add(rm);
      }
 
     public void Retry(View view) {
@@ -62,7 +64,7 @@ public class LearningActivity extends AppCompatActivity {
             int rssi = info.getRssi();
             RouterInRoom r = new RouterInRoom(bssid, rssi);
 
-            room.add(r);
+            rooms.get(rooms.size() - 1).add(r);
 
             ((TextView)findViewById(R.id.wifiStrength)).setText(rooms.toString());
         }

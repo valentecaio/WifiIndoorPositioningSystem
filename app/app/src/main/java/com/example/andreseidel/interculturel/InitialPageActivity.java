@@ -31,7 +31,7 @@ public class InitialPageActivity extends AppCompatActivity {
     }
 
     public void getStats(View view) {
-        getStats.setText(fileManager.getPath());
+        getStats.setText(fileManager.getPathStorageDirAsString());
         /*
         Intent intent = new Intent(this, ShowStatisticsActivity.class);
         startActivity(intent);
