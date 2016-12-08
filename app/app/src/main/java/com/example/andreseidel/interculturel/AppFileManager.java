@@ -9,38 +9,34 @@ import java.util.List;
 
 import java.io.*;
 
+import static android.system.Os.remove;
+
 /**
  * Created by caio on 08/12/2016.
  */
 
 public class AppFileManager {
-    String filename;
-    String appSubDir = "culturel/";
-    String fileFormat = ".csv";
-    FileOutputStream outputStream;
-    AppCompatActivity delegate;
-    Context context;
+    private String filePrefix = "room";
+    private String filename;
+    private FileOutputStream outputStream;
+    private AppCompatActivity delegate;
+    private Context context;
+
+    public AppFileManager(AppCompatActivity delegate) {
+        this.delegate = delegate;
+        this.context = delegate.getApplication().getApplicationContext();
+    }
 
     public AppFileManager(AppCompatActivity delegate, String filename) {
         this.delegate = delegate;
-        this.filename = filename + fileFormat;
         this.context = delegate.getApplication().getApplicationContext();
+        setFileName(filename);
     }
 
     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         return (Environment.MEDIA_MOUNTED.equals(state));
-    }
-
-    public File getPathStorageDir() {
-        // Get the directory for the user's public pictures directory.
-        File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOCUMENTS), appSubDir);
-        if (!file.mkdirs()) {
-            Log.e("", "Directory doesn't exist");
-        }
-        return file;
     }
 
     public void write(String data) {
@@ -55,17 +51,36 @@ public class AppFileManager {
         }
     }
 
-    public List<Room> readAll(){
-        List<Room> rooms = new ArrayList<Room>();
-
-        String path = context.getFilesDir().getAbsolutePath();
+    public ArrayList<String> readAll(){
+        // get paths from files
+        String path = this.context.getFilesDir().getAbsolutePath();
         IO.print("Path: " + path);
         File directory = new File(path);
         File[] files = directory.listFiles();
 
-        //TODO: terminar
+        // read files
+        ArrayList<String> results = new ArrayList<String>();
+        for(File file: files) {
+            this.setFileName(file.getName());
+            results.add(read());
+        }
+        return results;
+    }
 
-        return rooms;
+    public boolean deleteAll(){
+        String path = this.context.getFilesDir().getAbsolutePath();
+        IO.print("Path: " + path);
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+
+        boolean deleted = true;
+        for(File file: files){
+            if(file.getName().contains(filePrefix)) {
+                IO.print("deleting " + file.getName());
+                deleted = file.delete() && deleted;
+            }
+        }
+        return deleted;
     }
 
     public String read() {
@@ -95,5 +110,26 @@ public class AppFileManager {
         }
 
         return ret;
+    }
+
+    public void setFileName(String fileName) {
+        this.filename = filePrefix + fileName + ".csv";
+    }
+
+    public Room roomFromCSV(String csv) {
+        String[] data = csv.split("\n");
+        Room room = new Room(data[0]);
+        for (int i = 1; i < data.length; i++) {
+            String[] line = data[i].split(",");
+            if (line.length >= 3) {
+                RouterInRoom router = new RouterInRoom(
+                        line[0],
+                        Integer.parseInt(line[1]),
+                        Integer.parseInt(line[2])
+                );
+                room.add(router);
+            }
+        }
+        return room;
     }
 }
