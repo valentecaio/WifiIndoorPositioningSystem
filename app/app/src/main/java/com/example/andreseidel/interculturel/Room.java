@@ -26,10 +26,26 @@ public class Room {
         routers.add(rout);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<RouterInRoom> getRouters() {
+        return routers;
+    }
+
+    public void setRouters(List<RouterInRoom> routers) {
+        this.routers = routers;
+    }
+
     public String toString(){
-        String str = "";
+        String str = this.getName() + " ";
         for (RouterInRoom router : routers){
-            str = str+router.toString();
+            str = str + router.toString() + " -- " + router.getMean() + "\n";
         }
         return str;
     }
