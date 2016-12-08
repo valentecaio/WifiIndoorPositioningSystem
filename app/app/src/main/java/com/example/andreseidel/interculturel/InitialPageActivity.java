@@ -12,12 +12,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InitialPageActivity extends AppCompatActivity {
-
     EditText roomName;
     Button getStats;
     Button setStats;
-    List<Room> rooms = new ArrayList<Room>();
-
+    AppFileManager fileManager;
 
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
@@ -29,11 +27,15 @@ public class InitialPageActivity extends AppCompatActivity {
         setStats = (Button) findViewById(R.id.setStats);
         getStats = (Button) findViewById(R.id.getStats);
 
+        fileManager = new AppFileManager(this, "arquivo-teste");
     }
 
     public void getStats(View view) {
+        getStats.setText(fileManager.getPathStorageDirAsString());
+        /*
         Intent intent = new Intent(this, ShowStatisticsActivity.class);
         startActivity(intent);
+        */
     }
 
     public void setStats(View view) {

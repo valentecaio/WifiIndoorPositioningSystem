@@ -32,7 +32,11 @@ public class LearningActivity extends AppCompatActivity {
         rooms = new ArrayList<Room>();
         //Bundle bundle = getIntent().getExtras();
         //String message = bundle.getString("message");
-        //room = new Room(message);
+        //room = new Room(message)
+        //
+        Room rm = new Room(roomName);
+        rooms.add(rm);
+        ;
     }
 
     public void Back(View view) {
