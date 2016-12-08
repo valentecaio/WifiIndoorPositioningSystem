@@ -11,13 +11,13 @@ import android.content.Context;
 
 import java.util.List;
 
-
 public class LearningActivity extends AppCompatActivity {
     WifiManager mgr;
     WifiInfo info;
     TextView tv;
     List<RouterInRoom> routerInRoom;
     Room room;
+    AppFileManager fileManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     public void Back(View view) {
-        Intent intent2 = new Intent(this, showRoom.class);
+        Intent intent2 = new Intent(this, showRoomActivity.class);
         startActivity(intent2);
     }
 

@@ -54,7 +54,7 @@ public class CheckWifiNetworkActivity extends Activity {
     }
 
     public void Back(View view) {
-        Intent intent = new Intent(this, showRoom.class);
+        Intent intent = new Intent(this, showRoomActivity.class);
         startActivity(intent);
     }
 
