@@ -48,7 +48,8 @@ public class Room implements Serializable{
     }
 
     public String toString(){
-        String str = this.getName() + " \n";
+        String str = "Room " + this.getName() + " \n";
+
         for (RouterInRoom router : routers){
             str = str + router.toString() + " >> " + router.getMean() + "\n";
         }
