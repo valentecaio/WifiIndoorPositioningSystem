@@ -24,11 +24,9 @@ public class RouterInRoom {
         return mean;
     }
 
-<<<<<<< HEAD
     public String toString(){
         return name;
     }
-=======
     public int getSumSamples() {
         return sumSamples;
     }
@@ -60,5 +58,4 @@ public class RouterInRoom {
     public void setName(String name) {
         this.name = name;
     }
->>>>>>> e6f76d73128be134503d5960f2cc3db234d3bbd0
 }

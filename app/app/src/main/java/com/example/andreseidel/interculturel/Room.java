@@ -43,7 +43,7 @@ public class Room {
     }
 
     public String toString(){
-        String str = this.getName() + " ";
+        String str = this.getName() + " \n";
         for (RouterInRoom router : routers){
             str = str + router.toString() + " -- " + router.getMean() + "\n";
         }

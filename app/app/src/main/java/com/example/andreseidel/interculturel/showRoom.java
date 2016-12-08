@@ -10,12 +10,18 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import java.util.List;
+
+import java.util.ArrayList;
 
 public class showRoom extends AppCompatActivity {
 
     EditText roomName;
     Button runRoomLearning;
     Button stopRunning;
+    List<Room> rooms = new ArrayList<Room>();
+    
+
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     @Override
@@ -23,14 +29,14 @@ public class showRoom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_room);
 
+
         roomName = (EditText) findViewById(R.id.roomNameEntry);
         runRoomLearning = (Button) findViewById(R.id.runRoomLearning);
     }
 
     public void sendMessage(View view) {
         Intent intent = new Intent(this, learningActivity.class);
-        TextView editText = (TextView) findViewById(R.id.roomName);
-        intent.putExtra("message", editText.toString());
+        intent.putExtra("message", roomName.getText().toString());
         startActivity(intent);
     }
 
