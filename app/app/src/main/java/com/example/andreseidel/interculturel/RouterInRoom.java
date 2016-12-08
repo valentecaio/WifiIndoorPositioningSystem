@@ -23,4 +23,36 @@ public class RouterInRoom {
         mean = sumSamples/nSamples;
         return mean;
     }
+
+    public int getSumSamples() {
+        return sumSamples;
+    }
+
+    public void setSumSamples(int sumSamples) {
+        this.sumSamples = sumSamples;
+    }
+
+    public int getnSamples() {
+        return nSamples;
+    }
+
+    public void setnSamples(int nSamples) {
+        this.nSamples = nSamples;
+    }
+
+    public float getMean() {
+        return mean;
+    }
+
+    public void setMean(float mean) {
+        this.mean = mean;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

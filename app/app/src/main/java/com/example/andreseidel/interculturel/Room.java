@@ -26,10 +26,11 @@ public class Room {
         routers.add(rout);
     }
 
-    public toString(){
+    public String toString(){
         String str = "";
         for (RouterInRoom router : routers){
-            str = str+router+toString();
+            str = str + router.toString() + " -- " + router.getMean() + "\n";
         }
+        return str;
     }
 }

@@ -1,31 +1,23 @@
 package com.example.andreseidel.interculturel;
 
-import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.format.Formatter;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.content.Context;
-import android.net.wifi.ScanResult;
 
-import java.util.ArrayList;
 import java.util.List;
-import android.content.BroadcastReceiver;
-import android.widget.Toast;
 
 
 public class learningActivity extends AppCompatActivity {
     WifiManager mgr;
     WifiInfo info;
     TextView tv;
-    List<Router> routers;
+    List<RouterInRoom> routerInRoom;
+    Room room;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +26,8 @@ public class learningActivity extends AppCompatActivity {
 
         tv = (TextView) findViewById(R.id.wifiStrength);
         mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-
+        room = new Room("zoeira");
     }
-
 
     public void Back(View view) {
         Intent intent = new Intent(this, showRoom.class);
@@ -53,14 +44,13 @@ public class learningActivity extends AppCompatActivity {
 
             String bssid = info.getBSSID();
             int rssi = info.getRssi();
-            Router r = new Router(bssid, rssi);
+            RouterInRoom r = new RouterInRoom(bssid, rssi);
 
-            routers.add(r);
+            routerInRoom.add(r);
             //String data5 = wifiReciever.getResultData();
         }
         catch (Exception e){
             tv.setText(""+ e.getLocalizedMessage());
         }
     }
-
 }
