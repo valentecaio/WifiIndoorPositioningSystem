@@ -39,8 +39,9 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng telecom = new LatLng(48.359230, -4.569985);
+        mMap.addMarker(new MarkerOptions().position(telecom).title("Marker in telecom"));
+        float zoomLevel = 17; //This goes up to 21
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(telecom, zoomLevel));
     }
 }
