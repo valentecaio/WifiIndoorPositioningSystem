@@ -42,7 +42,8 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     public void setName(View view) {
-        String roomName = (String)findViewById(R.id.roomName).toString();
+        EditText edText = (EditText)findViewById(R.id.roomName);
+        String roomName = edText.getText().toString();
 
         room.setName(roomName);
         rooms.add(room);
@@ -60,9 +61,9 @@ public class LearningActivity extends AppCompatActivity {
             int rssi = info.getRssi();
             RouterInRoom r = new RouterInRoom(bssid, rssi);
 
-            r.add(r);
+            room.add(r);
 
-            ((TextView)findViewById(R.id.wifiStrength)).setText(r.toString());
+            ((TextView)findViewById(R.id.wifiStrength)).setText(rooms.toString());
         }
         catch (Exception e){
             tv.setText("" + e.getLocalizedMessage());
