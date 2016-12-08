@@ -10,9 +10,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private List<Building> buildings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        buildings = new ArrayList<Building>();
     }
 
 
@@ -39,9 +44,13 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng telecom = new LatLng(48.359230, -4.569985);
+        LatLng telecom = new LatLng(48.358613, -4.570223);
         mMap.addMarker(new MarkerOptions().position(telecom).title("Marker in telecom"));
         float zoomLevel = 17; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(telecom, zoomLevel));
+    }
+
+    public void showBuilding(String name){
+
     }
 }
