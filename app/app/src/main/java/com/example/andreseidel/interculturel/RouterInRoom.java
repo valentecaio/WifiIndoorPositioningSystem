@@ -7,7 +7,6 @@ package com.example.andreseidel.interculturel;
 public class RouterInRoom {
     private int sumSamples;
     private int nSamples;
-    private float mean;
     private String bssid;
 
     // construtor to get data from CSV
@@ -21,14 +20,12 @@ public class RouterInRoom {
         this.bssid = bssid;
         this.sumSamples = rssi;
         this.nSamples = 1;
-        this.mean = sumSamples/nSamples;
     }
 
     public float add(RouterInRoom rout){
         sumSamples = sumSamples + rout.sumSamples;
         nSamples = nSamples + 1;
-        mean = sumSamples/nSamples;
-        return mean;
+        return this.getMean();
     }
 
     public String toString(){
@@ -52,11 +49,7 @@ public class RouterInRoom {
     }
 
     public float getMean() {
-        return mean;
-    }
-
-    public void setMean(float mean) {
-        this.mean = mean;
+        return sumSamples/nSamples;
     }
 
     public String getBssid() {
