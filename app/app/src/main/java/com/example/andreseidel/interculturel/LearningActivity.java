@@ -17,17 +17,19 @@ public class LearningActivity extends AppCompatActivity {
     WifiManager mgr;
     WifiInfo info;
     TextView tv;
+    EditText roomName;
     List<RouterInRoom> routerInRoom;
     List<Room> rooms;
-    AppFileManager fileManager;
     Room room;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_learning);
 
+        setContentView(R.layout.activity_learning);
         tv = (TextView) findViewById(R.id.wifiStrength);
         mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        roomName = (EditText) findViewById(R.id.roomName);
 
         rooms = new ArrayList<Room>();
         //Bundle bundle = getIntent().getExtras();
@@ -36,6 +38,9 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     public void Back(View view) {
+        // save everything before go back
+        saveRoomsInfo();
+
         Intent intent2 = new Intent(this, InitialPageActivity.class);
         startActivity(intent2);
     }
@@ -51,13 +56,11 @@ public class LearningActivity extends AppCompatActivity {
     public void Retry(View view) {
         try {
             info = mgr.getConnectionInfo();
-
             //String data3 = wifiReciever.toString();
-
             //String data2 = wifiScanList.get(0).toString();
-
             String bssid = info.getBSSID();
             int rssi = info.getRssi();
+
             RouterInRoom r = new RouterInRoom(bssid, rssi);
 
             rooms.get(rooms.size() - 1).add(r);
@@ -67,5 +70,10 @@ public class LearningActivity extends AppCompatActivity {
         catch (Exception e){
             tv.setText("" + e.getLocalizedMessage());
         }
+    }
+
+    private void saveRoomsInfo(){
+        IO.print(roomName.getText().toString());
+        AppFileManager fileManager = new AppFileManager(this, tv.getText().toString());
     }
 }

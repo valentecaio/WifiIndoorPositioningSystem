@@ -13,28 +13,15 @@ import java.io.*;
 public class AppFileManager {
     String filename;
     String appSubDir = "culturel/";
+    String fileFormat = ".csv";
     FileOutputStream outputStream;
     AppCompatActivity delegate;
+    Context context;
 
     public AppFileManager(AppCompatActivity delegate, String filename) {
         this.delegate = delegate;
-        this.filename = filename + ".csv";
-        Context context = delegate.getApplication().getApplicationContext();
-        File file = new File(context.getFilesDir(), this.filename);
-        try {
-            this.outputStream = this.delegate.getApplication().openFileOutput(filename, context.MODE_PRIVATE);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void write(String text) {
-        try {
-            outputStream.write(text.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.filename = filename + fileFormat;
+        this.context = delegate.getApplication().getApplicationContext();
     }
 
     /* Checks if external storage is available for read and write */
@@ -48,22 +35,48 @@ public class AppFileManager {
         File file = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOCUMENTS), appSubDir);
         if (!file.mkdirs()) {
-            Log.e("", "Directory not created");
+            Log.e("", "Directory doesn't exist");
         }
         return file;
     }
 
-    public File getPathToFile(String filename) {
-        // Get the directory for the user's public pictures directory.
-        File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOCUMENTS), appSubDir + filename);
-        if (!file.mkdirs()) {
-            Log.e("", "Directory not created");
+    public void write(String data) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
         }
-        return file;
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 
-    public String getPathStorageDirAsString() {
-        return getPathStorageDir().getAbsolutePath().toString();
+    public String read() {
+        String ret = "";
+        try {
+            InputStream inputStream = context.openFileInput(filename);
+            IO.print("reading from " + context.getFilesDir().getAbsolutePath());
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
     }
 }

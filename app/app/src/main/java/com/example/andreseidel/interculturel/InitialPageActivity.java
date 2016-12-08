@@ -1,7 +1,10 @@
 package com.example.andreseidel.interculturel;
 
+import android.content.Context;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View;
@@ -26,16 +29,11 @@ public class InitialPageActivity extends AppCompatActivity {
 
         setStats = (Button) findViewById(R.id.setStats);
         getStats = (Button) findViewById(R.id.getStats);
-
-        fileManager = new AppFileManager(this, "arquivo-teste");
     }
 
     public void getStats(View view) {
-        getStats.setText(fileManager.getPathStorageDirAsString());
-        /*
         Intent intent = new Intent(this, ShowStatisticsActivity.class);
         startActivity(intent);
-        */
     }
 
     public void setStats(View view) {
@@ -47,4 +45,5 @@ public class InitialPageActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TelecomMapActivity.class);
         startActivity(intent);
     }
+
 }

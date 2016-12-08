@@ -60,13 +60,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Room Name"
         android:ems="10"
         android:id="@+id/roomName"
+        android:hint="Room Name"
         android:layout_alignBottom="@+id/setName"
-        android:layout_toRightOf="@+id/setName"
-        android:layout_toEndOf="@+id/setName"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
