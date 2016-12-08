@@ -39,17 +39,22 @@ public class LearningActivity extends AppCompatActivity {
         startActivity(intent2);
     }
 
-    public void setName(View view) {
+    public void saveRoomData(View view) throws RoomWithoutNameException {
         // gets room name
         String name = roomName.getText().toString();
         this.room.setName(name);
 
-        // save everything before go back
-        try {
-            saveRoomsInfo();
-        } catch (RoomWithoutNameException e) {
-            e.printStackTrace();
+        // exception if name is invalid
+        if(this.room.getName() == null || this.room.getName().isEmpty()){
+            throw new RoomWithoutNameException();
         }
+
+        String dataToWrite = this.room.toCSV();
+        IO.print(this, roomName.getText().toString());
+        IO.print(dataToWrite);
+
+        AppFileManager fileManager = new AppFileManager(this, this.room.getName());
+        fileManager.write(dataToWrite);
     }
 
     public void Retry(View view) {
@@ -71,14 +76,5 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     private void saveRoomsInfo() throws RoomWithoutNameException {
-        if(this.room.getName() == null || this.room.getName().isEmpty()){
-            throw new RoomWithoutNameException();
-        }
-        IO.print(this, roomName.getText().toString());
-        String dataToWrite = this.room.toCSV();
-        IO.print(dataToWrite);
-
-        AppFileManager fileManager = new AppFileManager(this, this.room.getName());
-        fileManager.write(dataToWrite);
     }
 }

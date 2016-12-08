@@ -41,7 +41,7 @@
         android:layout_alignLeft="@+id/back"
         android:layout_alignStart="@+id/back"
         android:layout_marginTop="37dp"
-        android:onClick="setName" />
+        android:onClick="saveRoomData (LearningActivity)" />
 
     <Button
         android:text="Retry"
