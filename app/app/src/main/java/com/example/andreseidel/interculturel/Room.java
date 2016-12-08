@@ -19,15 +19,18 @@ public class Room implements Serializable{
     public Room(){}
 
     public Room RoomFromCSV(String csv){
-        String[] data = csv.split(",");
+        String[] data = csv.split("\n");
         Room room = new Room(data[0]);
         for(int i=1; i<data.length; i++) {
-            RouterInRoom router = new RouterInRoom(
-                    data[i],
-                    Integer.parseInt(data[i+1]),
-                    Integer.parseInt(data[i+2])
-            );
-            room.add(router);
+            String[] line = data[i].split(",");
+            if(line.length >= 3) {
+                RouterInRoom router = new RouterInRoom(
+                        line[0],
+                        Integer.parseInt(line[1]),
+                        Integer.parseInt(line[2])
+                );
+                room.add(router);
+            }
         }
         return room;
     }
@@ -71,7 +74,7 @@ public class Room implements Serializable{
         String str = this.getName();
 
         for (RouterInRoom router : routers){
-            str += "," + router.toCSV();
+            str += "\n" + router.toCSV();
         }
         return str;
     }
