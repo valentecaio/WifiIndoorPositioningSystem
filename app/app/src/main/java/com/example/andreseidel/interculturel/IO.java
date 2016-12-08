@@ -10,4 +10,8 @@ public class IO {
     public static void print(String str){
         Log.e("IO", str);
     }
+
+    public static void print(Object o, String str){
+        Log.e("IO " + o.getClass().getName(), str);
+    }
 }

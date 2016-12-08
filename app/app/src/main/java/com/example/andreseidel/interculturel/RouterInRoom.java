@@ -8,10 +8,10 @@ public class RouterInRoom {
     private int sumSamples;
     private int nSamples;
     private float mean;
-    private String name;
+    private String bssid;
 
-    public RouterInRoom (String name, int rssi){
-        this.name = name;
+    public RouterInRoom (String bssid, int rssi){
+        this.bssid = bssid;
         this.sumSamples = rssi;
         this.nSamples = 1;
         this.mean = sumSamples/nSamples;
@@ -25,8 +25,9 @@ public class RouterInRoom {
     }
 
     public String toString(){
-        return name;
+        return bssid;
     }
+    
     public int getSumSamples() {
         return sumSamples;
     }
@@ -51,11 +52,11 @@ public class RouterInRoom {
         this.mean = mean;
     }
 
-    public String getName() {
-        return name;
+    public String getBssid() {
+        return bssid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBssid(String bssid) {
+        this.bssid = bssid;
     }
 }

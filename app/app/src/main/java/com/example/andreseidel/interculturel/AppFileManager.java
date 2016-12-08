@@ -45,6 +45,7 @@ public class AppFileManager {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
+            IO.print(this, "wrote with sucess the file " + filename);
         }
         catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());

@@ -10,16 +10,13 @@ import java.util.List;
 
 public class Room implements Serializable{
     private String name;
-    private List<RouterInRoom> routers;
+    private List<RouterInRoom> routers = new ArrayList<RouterInRoom>();
 
     public Room(String name){
         this.name = name;
-        this.routers = new ArrayList<RouterInRoom>();
     }
 
-    public Room(){
-        this.routers = new ArrayList<RouterInRoom>();
-    }
+    public Room(){}
 
     public void add(RouterInRoom rout){
         for(RouterInRoom router : routers){
@@ -56,5 +53,13 @@ public class Room implements Serializable{
         return str;
     }
 
+    public String toCSVString(){
+        String str = "Room " + this.getName();
+
+        for (RouterInRoom router : routers){
+            str += "," + router.getBssid() + "," + router.getMean();
+        }
+        return str;
+    }
 
 }

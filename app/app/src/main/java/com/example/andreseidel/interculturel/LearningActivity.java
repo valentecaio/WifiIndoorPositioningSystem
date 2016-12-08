@@ -18,9 +18,7 @@ public class LearningActivity extends AppCompatActivity {
     WifiInfo info;
     TextView tv;
     EditText roomName;
-    List<RouterInRoom> routerInRoom;
-    List<Room> rooms;
-    Room room;
+    Room room = new Room();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,26 +29,31 @@ public class LearningActivity extends AppCompatActivity {
         mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         roomName = (EditText) findViewById(R.id.roomName);
 
-        rooms = new ArrayList<Room>();
         //Bundle bundle = getIntent().getExtras();
         //String message = bundle.getString("message");
         //room = new Room(message);
     }
 
     public void Back(View view) {
-        // save everything before go back
-        saveRoomsInfo();
+        // gets room name
+        String name = roomName.getText().toString();
+        this.room.setName(name);
 
+        // save everything before go back
+        try {
+            saveRoomsInfo();
+        } catch (RoomWithoutNameException e) {
+            e.printStackTrace();
+        }
+        /*
         Intent intent2 = new Intent(this, InitialPageActivity.class);
         startActivity(intent2);
+        */
     }
 
     public void setName(View view) {
-        EditText edText = (EditText)findViewById(R.id.roomName);
-        String roomName = edText.getText().toString();
-
-        Room rm = new Room(roomName);
-        rooms.add(rm);
+        String name = roomName.getText().toString();
+        this.room.setName(name);
     }
 
     public void Retry(View view) {
@@ -62,18 +65,23 @@ public class LearningActivity extends AppCompatActivity {
             int rssi = info.getRssi();
 
             RouterInRoom r = new RouterInRoom(bssid, rssi);
+            room.add(r);
 
-            rooms.get(rooms.size() - 1).add(r);
-
-            ((TextView)findViewById(R.id.wifiStrength)).setText(rooms.toString());
+            tv.setText(room.toString());
         }
         catch (Exception e){
             tv.setText("" + e.getLocalizedMessage());
         }
     }
 
-    private void saveRoomsInfo(){
-        IO.print(roomName.getText().toString());
-        AppFileManager fileManager = new AppFileManager(this, tv.getText().toString());
+    private void saveRoomsInfo() throws RoomWithoutNameException {
+        if(this.room.getName() == null || this.room.getName().isEmpty()){
+            throw new RoomWithoutNameException();
+        }
+        IO.print(this, roomName.getText().toString());
+        String dataToWrite = this.room.toCSVString();
+        
+        AppFileManager fileManager = new AppFileManager(this, this.room.getName());
+        fileManager.write(dataToWrite);
     }
 }
