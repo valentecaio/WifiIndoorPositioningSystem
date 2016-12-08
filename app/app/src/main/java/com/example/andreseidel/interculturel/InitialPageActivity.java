@@ -11,10 +11,10 @@ import java.util.List;
 
 import java.util.ArrayList;
 
-public class showRoomActivity extends AppCompatActivity {
+public class InitialPageActivity extends AppCompatActivity {
     EditText roomName;
-    Button runRoomLearning;
-    Button stopRunning;
+    Button getStats;
+    Button setStats;
     List<Room> rooms = new ArrayList<Room>();
     AppFileManager fileManager;
 
@@ -23,19 +23,29 @@ public class showRoomActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_room);
+        setContentView(R.layout.activity_initial_page);
 
-        roomName = (EditText) findViewById(R.id.roomNameEntry);
-        runRoomLearning = (Button) findViewById(R.id.runRoomLearning);
+        setStats = (Button) findViewById(R.id.setStats);
+        getStats = (Button) findViewById(R.id.getStats);
 
         fileManager = new AppFileManager(this, "arquivo-teste");
     }
 
-    public void sendMessage(View view) {
-        runRoomLearning.setText(fileManager.getPath());
+    public void getStats(View view) {
+        getStats.setText(fileManager.getPath());
+        /*
+        Intent intent = new Intent(this, ShowStatisticsActivity.class);
+        startActivity(intent);
+        */
+    }
+
+    public void setStats(View view) {
         Intent intent = new Intent(this, LearningActivity.class);
-        intent.putExtra("message", roomName.getText().toString());
         startActivity(intent);
     }
 
+    public void getMap(View view) {
+        Intent intent = new Intent(this, TelecomMapActivity.class);
+        startActivity(intent);
+    }
 }

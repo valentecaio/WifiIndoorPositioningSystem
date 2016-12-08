@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LearningActivity extends AppCompatActivity {
@@ -16,6 +18,8 @@ public class LearningActivity extends AppCompatActivity {
     WifiInfo info;
     TextView tv;
     List<RouterInRoom> routerInRoom;
+    List<Room> rooms;
+    AppFileManager fileManager;
     Room room;
 
     @Override
@@ -26,15 +30,24 @@ public class LearningActivity extends AppCompatActivity {
         tv = (TextView) findViewById(R.id.wifiStrength);
         mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
-        Bundle bundle = getIntent().getExtras();
-        String message = bundle.getString("message");
-        room = new Room(message);
+        rooms = new ArrayList<Room>();
+        room = new Room();
+        //Bundle bundle = getIntent().getExtras();
+        //String message = bundle.getString("message");
+        //room = new Room(message);
     }
 
     public void Back(View view) {
         Intent intent2 = new Intent(this, InitialPageActivity.class);
         startActivity(intent2);
     }
+
+    public void setName(View view) {
+        String roomName = (String)findViewById(R.id.roomName).toString();
+
+        room.setName(roomName);
+        rooms.add(room);
+     }
 
     public void Retry(View view) {
         try {
@@ -48,9 +61,9 @@ public class LearningActivity extends AppCompatActivity {
             int rssi = info.getRssi();
             RouterInRoom r = new RouterInRoom(bssid, rssi);
 
-            room.add(r);
+            r.add(r);
 
-            ((TextView)findViewById(R.id.wifiStrength)).setText(room.toString());
+            ((TextView)findViewById(R.id.wifiStrength)).setText(r.toString());
         }
         catch (Exception e){
             tv.setText("" + e.getLocalizedMessage());

@@ -23,35 +23,50 @@
         android:text="Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/back"
+        android:onClick="Back"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="43dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginBottom="75dp"
-        android:id="@+id/back"
-        android:onClick="Back" />
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Set name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/setName"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/back"
+        android:layout_alignStart="@+id/back"
+        android:layout_marginTop="37dp"
+        android:onClick="setName" />
 
     <Button
         android:text="Retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/Retry"
+        android:onClick="Retry"
+        android:layout_alignBaseline="@+id/back"
         android:layout_alignBottom="@+id/back"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="66dp"
-        android:layout_marginEnd="66dp"
-        android:id="@+id/Retry"
-        android:onClick="Retry" />
+        android:layout_marginRight="29dp"
+        android:layout_marginEnd="29dp" />
 
-    <TextView
-        android:text="Walk!"
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="63dp"
-        android:id="@+id/edit_message"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/wifiStrength"
-        android:layout_alignStart="@+id/wifiStrength" />
+        android:inputType="textPersonName"
+        android:text="Room Name"
+        android:ems="10"
+        android:id="@+id/roomName"
+        android:layout_alignBottom="@+id/setName"
+        android:layout_toRightOf="@+id/setName"
+        android:layout_toEndOf="@+id/setName"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp" />
 
 </RelativeLayout>
