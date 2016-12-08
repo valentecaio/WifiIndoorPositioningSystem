@@ -22,9 +22,9 @@ public class RouterInRoom {
         this.nSamples = 1;
     }
 
-    public float add(RouterInRoom rout){
-        sumSamples = sumSamples + rout.sumSamples;
-        nSamples = nSamples + 1;
+    public float addSample(int rssi){
+        sumSamples += rssi;
+        nSamples += 1;
         return this.getMean();
     }
 

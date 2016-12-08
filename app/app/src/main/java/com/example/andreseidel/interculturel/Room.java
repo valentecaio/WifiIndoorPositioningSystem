@@ -35,7 +35,7 @@ public class Room implements Serializable{
     public void add(RouterInRoom rout){
         for(RouterInRoom router : routers){
             if (router.toString().equals(rout.toString())){
-                router.add(rout);
+                router.addSample(rout.getSumSamples());
                 return;
             }
         }
@@ -68,7 +68,7 @@ public class Room implements Serializable{
     }
 
     public String toCSV(){
-        String str = "Room " + this.getName();
+        String str = this.getName();
 
         for (RouterInRoom router : routers){
             str += "," + router.toCSV();
