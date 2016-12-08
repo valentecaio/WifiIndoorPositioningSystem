@@ -4,6 +4,9 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import java.io.*;
 
 /**
@@ -50,6 +53,19 @@ public class AppFileManager {
         catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
+    }
+
+    public List<Room> readAll(){
+        List<Room> rooms = new ArrayList<Room>();
+
+        String path = context.getFilesDir().getAbsolutePath();
+        IO.print("Path: " + path);
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+
+        //TODO: terminar
+
+        return rooms;
     }
 
     public String read() {
