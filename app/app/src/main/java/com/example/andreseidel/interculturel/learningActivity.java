@@ -33,7 +33,7 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     public void Back(View view) {
-        Intent intent2 = new Intent(this, showRoomActivity.class);
+        Intent intent2 = new Intent(this, InitialPageActivity.class);
         startActivity(intent2);
     }
 
