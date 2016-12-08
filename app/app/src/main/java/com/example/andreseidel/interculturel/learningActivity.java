@@ -26,6 +26,10 @@ public class learningActivity extends AppCompatActivity {
 
         tv = (TextView) findViewById(R.id.wifiStrength);
         mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
+        Bundle bundle = getIntent().getExtras();
+        String message = bundle.getString("message");
+        room = new Room(message);
     }
 
     public void Back(View view) {
@@ -45,8 +49,10 @@ public class learningActivity extends AppCompatActivity {
             int rssi = info.getRssi();
             RouterInRoom r = new RouterInRoom(bssid, rssi);
 
-            routerInRoom.add(r);
-            //String data5 = wifiReciever.getResultData();
+            room.add(r);
+
+
+            ((TextView)findViewById(R.id.wifiStrength)).setText(room.toString());
         }
         catch (Exception e){
             tv.setText(""+ e.getLocalizedMessage());
