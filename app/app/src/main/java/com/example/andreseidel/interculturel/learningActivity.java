@@ -12,7 +12,7 @@ import android.content.Context;
 import java.util.List;
 
 
-public class learningActivity extends AppCompatActivity {
+public class LearningActivity extends AppCompatActivity {
     WifiManager mgr;
     WifiInfo info;
     TextView tv;
@@ -54,7 +54,7 @@ public class learningActivity extends AppCompatActivity {
             ((TextView)findViewById(R.id.wifiStrength)).setText(room.toString());
         }
         catch (Exception e){
-            tv.setText(""+ e.getLocalizedMessage());
+            tv.setText("" + e.getLocalizedMessage());
         }
     }
 }

@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".learningActivity"></activity>
+        <activity android:name=".LearningActivity"></activity>
 
         <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
