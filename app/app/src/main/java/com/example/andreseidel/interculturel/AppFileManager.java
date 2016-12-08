@@ -51,4 +51,10 @@ public class AppFileManager {
         }
         return file;
     }
+
+    public String getPath() {
+        String str = "";
+        str = getAlbumStorageDir(this.filename).getAbsolutePath().toString();
+        return str;
+    }
 }

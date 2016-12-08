@@ -17,7 +17,6 @@ public class LearningActivity extends AppCompatActivity {
     TextView tv;
     List<RouterInRoom> routerInRoom;
     Room room;
-    AppFileManager fileManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
