@@ -34,8 +34,8 @@ public class learningActivity extends AppCompatActivity {
     }
 
     public void Back(View view) {
-        Intent intent = new Intent(this, showRoom.class);
-        startActivity(intent);
+        Intent intent2 = new Intent(this, showRoom.class);
+        startActivity(intent2);
     }
 
     public void Retry(View view) {

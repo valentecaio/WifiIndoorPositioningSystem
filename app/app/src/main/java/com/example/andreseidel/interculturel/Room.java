@@ -1,5 +1,6 @@
 package com.example.andreseidel.interculturel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by AndreSeidel on 07/12/16.
  */
 
-public class Room {
+public class Room implements Serializable{
     private String name;
     private List<RouterInRoom> routers;
 
