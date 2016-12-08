@@ -17,6 +17,10 @@ public class Room implements Serializable{
         this.routers = new ArrayList<RouterInRoom>();
     }
 
+    public Room(){
+        this.routers = new ArrayList<RouterInRoom>();
+    }
+
     public void add(RouterInRoom rout){
         for(RouterInRoom router : routers){
             if (router.toString().equals(rout.toString())){
