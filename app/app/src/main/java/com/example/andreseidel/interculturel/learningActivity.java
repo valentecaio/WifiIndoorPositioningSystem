@@ -51,7 +51,6 @@ public class learningActivity extends AppCompatActivity {
 
             room.add(r);
 
-
             ((TextView)findViewById(R.id.wifiStrength)).setText(room.toString());
         }
         catch (Exception e){
