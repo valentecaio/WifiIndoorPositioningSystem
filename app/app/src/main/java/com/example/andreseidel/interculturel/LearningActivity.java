@@ -35,6 +35,11 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     public void Back(View view) {
+        Intent intent2 = new Intent(this, InitialPageActivity.class);
+        startActivity(intent2);
+    }
+
+    public void setName(View view) {
         // gets room name
         String name = roomName.getText().toString();
         this.room.setName(name);
@@ -45,15 +50,6 @@ public class LearningActivity extends AppCompatActivity {
         } catch (RoomWithoutNameException e) {
             e.printStackTrace();
         }
-        /*
-        Intent intent2 = new Intent(this, InitialPageActivity.class);
-        startActivity(intent2);
-        */
-    }
-
-    public void setName(View view) {
-        String name = roomName.getText().toString();
-        this.room.setName(name);
     }
 
     public void Retry(View view) {
@@ -80,7 +76,7 @@ public class LearningActivity extends AppCompatActivity {
         }
         IO.print(this, roomName.getText().toString());
         String dataToWrite = this.room.toCSVString();
-        
+
         AppFileManager fileManager = new AppFileManager(this, this.room.getName());
         fileManager.write(dataToWrite);
     }
