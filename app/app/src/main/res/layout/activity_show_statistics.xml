@@ -10,9 +10,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.andreseidel.interculturel.ShowStatisticsActivity">
 
+	<ListView
+	android:id="@+id/statistics_list_view"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent">
+	</ListView>
+	
     <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
+		android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
