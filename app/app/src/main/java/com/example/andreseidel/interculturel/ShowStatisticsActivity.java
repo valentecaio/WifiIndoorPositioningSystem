@@ -21,6 +21,7 @@ public class ShowStatisticsActivity extends AppCompatActivity {
         ArrayList<Room> rooms = fileMgr.readAllRoomsAsArray();
         String str = "";
         for(Room r: rooms){
+            IO.print(r.toString());
             str += r + "\n";
         }
         wifiDataTV.setText(str);

@@ -111,7 +111,7 @@ public class AppFileManager {
     }
 
     public Room roomFromCSV(String csv) {
-        String[] data = csv.split("\n");
+        String[] data = csv.split("===");
         Room room = new Room(data[0]);
         for (int i = 1; i < data.length; i++) {
             String[] line = data[i].split(",");
