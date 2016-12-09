@@ -80,9 +80,28 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                                                 .add(new LatLng(48.358620, -4.570814))
                                                 .add(new LatLng(48.358574, -4.570960))
                                                 .add(new LatLng(48.358974, -4.571230));
-        e1.fillColor(3332);
-        Building d03 = new Building("D03", e1, new LatLng(48.358769, -4.571014));
+        d3.fillColor(3332);
+        Building d03 = new Building("D03", d3, new LatLng(48.358769, -4.571014));
         buildings.add(d03);
+
+        PolygonOptions d1 = new PolygonOptions().add(new LatLng(48.359193, -4.571061))
+                                                .add(new LatLng(48.359289, -4.570750))
+                                                .add(new LatLng(48.359018, -4.570571))
+                                                .add(new LatLng(48.358933, -4.570880))
+                                                .add(new LatLng(48.359193, -4.571061));
+        d1.fillColor(3332);
+        Building d01 = new Building("D01", d1, new LatLng(48.359107, -4.570807));
+        buildings.add(d01);
+
+        PolygonOptions d2 = new PolygonOptions().add(new LatLng(48.359288, -4.570745))
+                                                .add(new LatLng(48.359403, -4.570349))
+                                                .add(new LatLng(48.359080, -4.570114))
+                                                .add(new LatLng(48.359006, -4.570356))
+                                                .add(new LatLng(48.359207, -4.570500))
+                                                .add(new LatLng(48.359288, -4.570745));
+        d1.fillColor(3332);
+        Building d02 = new Building("D02", d2, new LatLng(48.359107, -4.570807));
+        buildings.add(d02);
 
     }
 
@@ -113,6 +132,8 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         showBuildingsInOrder(way);
 
         Room location = findYourself();
+
+        IO.print(location.getName());
 
         Building b = getBuildingFromName(location.getName());
 
