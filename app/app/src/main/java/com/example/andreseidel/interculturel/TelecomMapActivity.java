@@ -15,11 +15,15 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 
 public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private List<Building> buildings;
+    WifiManager mgr;
+    WifiInfo info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
         buildings = new ArrayList<Building>();
         createBuildings(buildings);
+
     }
 
     private void createBuildings(List<Building> buildings) {
@@ -70,6 +75,14 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         Building e01 = new Building("E01", e1, new LatLng(48.358965, -4.569876));
         buildings.add(e01);
 
+        PolygonOptions d3 = new PolygonOptions().add(new LatLng(48.358974, -4.571230))
+                                                .add(new LatLng(48.359013, -4.571090))
+                                                .add(new LatLng(48.358620, -4.570814))
+                                                .add(new LatLng(48.358574, -4.570960))
+                                                .add(new LatLng(48.358974, -4.571230));
+        e1.fillColor(3332);
+        Building d03 = new Building("D03", e1, new LatLng(48.358769, -4.571014));
+        buildings.add(d03);
 
     }
 
@@ -98,6 +111,27 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         way.add("B01");
         way.add("B03");
         showBuildingsInOrder(way);
+
+        Room location = findYourself();
+
+        Building b = getBuildingFromName(location.getName());
+
+        if(b != null) {
+            LatLng locationLatLng = b.getCenter();
+            mMap.addMarker(new MarkerOptions().position(locationLatLng).title("Where you are"));
+        }
+        else{
+            mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location"));
+        }
+    }
+
+    public Building getBuildingFromName(String name){
+        for(Building b : buildings){
+            if(b.getName().equals(name)){
+                return b;
+            }
+        }
+        return null;
     }
 
     public void showBuildingsInOrder(List<String> namesInOrder){
@@ -115,5 +149,42 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
             }
         }
         mMap.addPolyline(route);
+    }
+
+    public Room findYourself(){
+        AppFileManager fm = new AppFileManager(this);
+
+        List<Room> rooms = fm.readAllRoomsAsArray();
+        info = mgr.getConnectionInfo();
+        String bssid = info.getBSSID();
+        int rssi = info.getRssi();
+
+        List<RouterInRoom> candidates = new ArrayList<RouterInRoom>();
+        List<Integer> candidatesIndexesInRooms = new ArrayList<Integer>();
+        Room mostProbable = null;
+
+        int index = 0;
+        for (Room room : rooms){
+            for(RouterInRoom r : room.getRouters()){
+                if(r.getBssid().equals(bssid)){
+                    candidates.add(r);
+                    candidatesIndexesInRooms.add(index);
+                }
+            }
+            index++;
+        }
+
+        float minDif = 1000;
+        int i = 0;
+
+        for(RouterInRoom candidate : candidates){
+            float dif = rssi - candidate.getMean();
+            if (dif < minDif){
+                minDif = dif;
+                mostProbable = rooms.get(candidatesIndexesInRooms.get(i));
+            }
+            i++;
+        }
+        return mostProbable;
     }
 }
