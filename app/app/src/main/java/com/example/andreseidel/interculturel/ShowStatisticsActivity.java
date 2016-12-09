@@ -10,31 +10,23 @@ import java.util.List;
 
 public class ShowStatisticsActivity extends AppCompatActivity {
     TextView wifiDataTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_statistics);
         wifiDataTV = (TextView) findViewById(R.id.wifiDataTV);
 
-        ArrayList<Room> rooms = readAll();
+        AppFileManager fileMgr = new AppFileManager(this);
+        ArrayList<Room> rooms = fileMgr.readAllRoomsAsArray();
         String str = "";
         for(Room r: rooms){
             str += r + "\n";
         }
         wifiDataTV.setText(str);
-    }
 
-    public ArrayList<Room> readAll(){
-        // read all files
-        AppFileManager fileMgr = new AppFileManager(this);
-        ArrayList<String> roomsCSV = fileMgr.readAll();
-
-        // instantiate all rooms
-        ArrayList<Room> rooms = new ArrayList<Room>();
-        for(String roomCSV: roomsCSV){
-            rooms.add(fileMgr.roomFromCSV(roomCSV));
-        }
-        return rooms;
+        IO.print(str);
+        IO.print(rooms.toString());
     }
 
 }

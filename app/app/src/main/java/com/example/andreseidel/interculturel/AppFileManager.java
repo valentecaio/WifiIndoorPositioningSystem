@@ -132,4 +132,16 @@ public class AppFileManager {
         }
         return room;
     }
+
+    public ArrayList<Room> readAllRoomsAsArray(){
+        // read all files
+        ArrayList<String> roomsCSV = this.readAll();
+
+        // instantiate all rooms
+        ArrayList<Room> rooms = new ArrayList<Room>();
+        for(String roomCSV: roomsCSV){
+            rooms.add(this.roomFromCSV(roomCSV));
+        }
+        return rooms;
+    }
 }
