@@ -16,8 +16,7 @@ import static android.system.Os.remove;
  */
 
 public class AppFileManager {
-    private String filePrefix = "room_";
-    private String filename;
+    private String name;
     private FileOutputStream outputStream;
     private Context context;
 
@@ -31,7 +30,7 @@ public class AppFileManager {
 
     public AppFileManager(AppCompatActivity delegate, String filename) {
         this.context = delegate.getApplication().getApplicationContext();
-        setFileName(filename);
+        this.name = filename;
     }
 
     /* Checks if external storage is available for read and write */
@@ -42,10 +41,11 @@ public class AppFileManager {
 
     public void write(String data) {
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
+                    context.openFileOutput(this.name, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
-            IO.print(this, "wrote with sucess the file " + filename);
+            IO.print(this, "wrote with sucess the file " + this.name);
         }
         catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
@@ -62,7 +62,7 @@ public class AppFileManager {
         // read files
         ArrayList<String> results = new ArrayList<String>();
         for(File file: files) {
-            this.setFileName(file.getName());
+            this.name = (file.getName());
             results.add(read());
         }
         return results;
@@ -76,10 +76,8 @@ public class AppFileManager {
 
         boolean deleted = true;
         for(File file: files){
-            if(file.getName().contains(filePrefix)) {
-                IO.print("deleting " + file.getName());
-                deleted = file.delete() && deleted;
-            }
+            IO.print("deleting " + file.getName());
+            deleted = file.delete() && deleted;
         }
         return deleted;
     }
@@ -87,7 +85,7 @@ public class AppFileManager {
     public String read() {
         String ret = "";
         try {
-            InputStream inputStream = context.openFileInput(filename);
+            InputStream inputStream = context.openFileInput(this.name);
             IO.print("reading from " + context.getFilesDir().getAbsolutePath());
 
             if ( inputStream != null ) {
@@ -113,12 +111,8 @@ public class AppFileManager {
         return ret;
     }
 
-    public void setFileName(String fileName) {
-        this.filename = filePrefix + fileName + ".csv";
-    }
-
     public Room roomFromCSV(String csv) {
-        String[] data = csv.split("\n");
+        String[] data = csv.split("===");
         Room room = new Room(data[0]);
         for (int i = 1; i < data.length; i++) {
             String[] line = data[i].split(",");

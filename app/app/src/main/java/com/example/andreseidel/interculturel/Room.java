@@ -45,11 +45,18 @@ public class Room implements Serializable{
     }
 
     public String toString(){
-        String str = "Room " + this.getName() + " \n";
+        String str = "Room " + this.getName() + " [";
 
+        boolean first = true;
         for (RouterInRoom router : routers){
-            str = str + router.toString() + " >> " + router.getMean() + "\n";
+            if (!first) {
+                str += " // ";
+            } else {
+                first = false;
+            }
+            str += router.toCSV();
         }
+        str += "]";
         return str;
     }
 
@@ -57,7 +64,7 @@ public class Room implements Serializable{
         String str = this.getName();
 
         for (RouterInRoom router : routers){
-            str += "\n" + router.toCSV();
+            str += "===" + router.toCSV();
         }
         return str;
     }
