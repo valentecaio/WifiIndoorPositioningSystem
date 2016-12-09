@@ -20,7 +20,7 @@ public class Room implements Serializable{
 
     public void add(RouterInRoom rout){
         for(RouterInRoom router : routers){
-            if (router.toString().equals(rout.toString())){
+            if ( router.getBssid().equals(rout.getBssid()) ) {
                 router.addSample(rout.getSumSamples());
                 return;
             }
