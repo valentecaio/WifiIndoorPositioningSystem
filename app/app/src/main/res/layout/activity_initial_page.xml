@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find yourself in the building!"
+        android:text="find your self in the building!"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="135dp"
@@ -35,20 +35,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/setStats"
-        android:onClick="setStats"
         android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/getStats"
-        android:layout_alignStart="@+id/getStats" />
+        android:layout_alignStart="@+id/getStats"
+        android:onClick="setStats" />
 
     <Button
         android:text="Find your way!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="48dp"
         android:id="@+id/getMap"
-        android:onClick="getMap"
         android:layout_below="@+id/setStats"
-        android:layout_alignRight="@+id/setStats"
-        android:layout_alignEnd="@+id/setStats" />
+        android:layout_alignLeft="@+id/setStats"
+        android:layout_alignStart="@+id/setStats"
+        android:onClick="getMap" />
 
 </RelativeLayout>
