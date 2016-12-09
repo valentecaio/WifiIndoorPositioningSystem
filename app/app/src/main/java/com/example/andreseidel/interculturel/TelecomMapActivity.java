@@ -1,5 +1,6 @@
 package com.example.andreseidel.interculturel;
 
+import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -14,9 +15,23 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+
+import Dijkstra.engine.DijkstraAlgorithm;
+import Dijkstra.model.Edge;
+import Dijkstra.model.Graph;
+import Dijkstra.model.Vertex;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import Dijkstra.engine.*;
+import Dijkstra.model.*;
+import Dijkstra.test.*;
+
 
 public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -35,6 +50,8 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
         buildings = new ArrayList<Building>();
         createBuildings(buildings);
+        mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
 
     }
 
@@ -45,7 +62,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                                             .add(new LatLng(48.358423, -4.570286))
                                             .add(new LatLng(48.358642, -4.570442));
         b1.fillColor(0);
-        Building b01 = new Building("B01", b1, new LatLng(48.358607, -4.570020));
+        Building b01 = new Building("B01", b1, new LatLng(48.358555, -4.570028));
         buildings.add(b01);
 
         PolygonOptions b3 = new PolygonOptions().add(new LatLng(48.358565, -4.570389))
@@ -63,7 +80,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                                                 .add(new LatLng(48.359112, -4.570138))
                                                 .add(new LatLng(48.359213, -4.570206));
         a1.fillColor(3332);
-        Building a01 = new Building("A01", a1, new LatLng(48.359229, -4.570029));
+        Building a01 = new Building("A01", a1, new LatLng(48.359184, -4.570039));
         buildings.add(a01);
 
         PolygonOptions e1 = new PolygonOptions().add(new LatLng(48.358921, -4.570316))
@@ -72,7 +89,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                                                 .add(new LatLng(48.358761, -4.570201))
                                                 .add(new LatLng(48.358921, -4.570316));
         e1.fillColor(3332);
-        Building e01 = new Building("E01", e1, new LatLng(48.358965, -4.569876));
+        Building e01 = new Building("E01", e1, new LatLng(48.358955, -4.569901));
         buildings.add(e01);
 
         PolygonOptions d3 = new PolygonOptions().add(new LatLng(48.358974, -4.571230))
@@ -80,9 +97,41 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                                                 .add(new LatLng(48.358620, -4.570814))
                                                 .add(new LatLng(48.358574, -4.570960))
                                                 .add(new LatLng(48.358974, -4.571230));
-        e1.fillColor(3332);
-        Building d03 = new Building("D03", e1, new LatLng(48.358769, -4.571014));
+        d3.fillColor(3332);
+        Building d03 = new Building("D03", d3, new LatLng(48.358769, -4.571014));
         buildings.add(d03);
+
+        PolygonOptions d1 = new PolygonOptions().add(new LatLng(48.359193, -4.571061))
+                                                .add(new LatLng(48.359289, -4.570750))
+                                                .add(new LatLng(48.359018, -4.570571))
+                                                .add(new LatLng(48.358933, -4.570880))
+                                                .add(new LatLng(48.359193, -4.571061));
+        d1.fillColor(3332);
+        Building d01 = new Building("D01", d1, new LatLng(48.359107, -4.570807));
+        buildings.add(d01);
+
+        PolygonOptions d2 = new PolygonOptions().add(new LatLng(48.359288, -4.570745))
+                                                .add(new LatLng(48.359403, -4.570349))
+                                                .add(new LatLng(48.359080, -4.570114))
+                                                .add(new LatLng(48.359006, -4.570356))
+                                                .add(new LatLng(48.359207, -4.570500))
+                                                .add(new LatLng(48.359288, -4.570745));
+        d1.fillColor(3332);
+
+        Building d02 = new Building("D02", d2, new LatLng(48.359110, -4.570296));
+        buildings.add(d02);
+
+        Building e011 = new Building("E01-1", new LatLng(48.358862, -4.570178));
+        buildings.add(e011);
+        Building b011 = new Building("B01-1", new LatLng(48.358477, -4.570307));
+        buildings.add(b011);
+        Building b01port = new Building("B01-PORT1", new LatLng(48.358423, -4.570288));
+        buildings.add(b01port);
+        Building d03port1 = new Building("D03-PORT1", new LatLng(48.358621, -4.570770));
+        buildings.add(d03port1);
+        Building b03port1 = new Building("B03-PORT1", new LatLng(48.358507, -4.570714));
+        buildings.add(b03port1);
+
 
     }
 
@@ -105,23 +154,26 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         float zoomLevel = 17; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(telecom, zoomLevel));
 
-        List<String> way = new ArrayList<String>();
-        way.add("A01");
-        way.add("E01");
-        way.add("B01");
-        way.add("B03");
-        showBuildingsInOrder(way);
-
         Room location = findYourself();
 
-        Building b = getBuildingFromName(location.getName());
+        if(location != null) {
+            IO.print(location.getName());
+            Test t = new Test();
+            List<String> way = t.test(location.getName());
+            IO.print(way.toString());
 
-        if(b != null) {
-            LatLng locationLatLng = b.getCenter();
-            mMap.addMarker(new MarkerOptions().position(locationLatLng).title("You are here"));
-        }
-        else{
-            mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location"));
+            showBuildingsInOrder(way);
+
+            IO.print(location.getName());
+
+            Building b = getBuildingFromName(location.getName());
+
+            if (b != null) {
+                LatLng locationLatLng = b.getCenter();
+                mMap.addMarker(new MarkerOptions().position(locationLatLng).title("You are here"));
+            } else {
+                mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location"));
+            }
         }
     }
 
@@ -140,8 +192,10 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         for(String name : namesInOrder){
             for (Building b : buildings){
                 if(b.getName().equals(name)){
-                    b.getBoarders().visible(true);
-                    mMap.addPolygon(b.getBoarders());
+                    if(b.getBoarders() != null) {
+                        b.getBoarders().visible(true);
+                        mMap.addPolygon(b.getBoarders());
+                    }
                     mMap.addMarker(new MarkerOptions().position(b.getCenter()).title("" + i));
                     route.add(b.getCenter());
                     i++;
