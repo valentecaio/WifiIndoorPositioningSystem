@@ -18,7 +18,6 @@ public class InitialPageActivity extends AppCompatActivity {
     EditText roomName;
     Button getStats;
     Button setStats;
-    AppFileManager fileManager;
 
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
@@ -46,4 +45,8 @@ public class InitialPageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void deleteData(View view){
+        AppFileManager fileMgr = new AppFileManager(this);
+        fileMgr.deleteAll();
+    }
 }

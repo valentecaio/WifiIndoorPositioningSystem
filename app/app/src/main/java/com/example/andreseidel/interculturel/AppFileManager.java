@@ -16,7 +16,7 @@ import static android.system.Os.remove;
  */
 
 public class AppFileManager {
-    private String filePrefix = "room";
+    private String filePrefix = "room_";
     private String filename;
     private FileOutputStream outputStream;
     private AppCompatActivity delegate;
