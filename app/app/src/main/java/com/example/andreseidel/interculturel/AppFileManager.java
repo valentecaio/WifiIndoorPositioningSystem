@@ -18,16 +18,17 @@ import static android.system.Os.remove;
 public class AppFileManager {
     private String name;
     private FileOutputStream outputStream;
-    private AppCompatActivity delegate;
     private Context context;
 
     public AppFileManager(AppCompatActivity delegate) {
-        this.delegate = delegate;
         this.context = delegate.getApplication().getApplicationContext();
     }
 
+    public AppFileManager(Context context) {
+        this.context = context.getApplicationContext();
+    }
+
     public AppFileManager(AppCompatActivity delegate, String filename) {
-        this.delegate = delegate;
         this.context = delegate.getApplication().getApplicationContext();
         this.name = filename;
     }
