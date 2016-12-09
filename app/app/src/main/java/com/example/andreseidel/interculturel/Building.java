@@ -20,6 +20,11 @@ public class Building {
         this.boarders = b;
     }
 
+    public Building(String name, LatLng center) {
+        this.name = name;
+        this.center = center;
+    }
+
     public Building(String name, PolygonOptions boarders, LatLng center) {
         this.name = name;
         this.boarders = boarders;
