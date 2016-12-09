@@ -54,7 +54,7 @@ public class Room implements Serializable{
             } else {
                 first = false;
             }
-            str += router.toCSV();
+            str += router.toString();
         }
         str += "]";
         return str;

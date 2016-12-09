@@ -29,7 +29,7 @@ public class RouterInRoom {
     }
 
     public String toString(){
-        return bssid;
+        return "bssid: " + this.getBssid() + ", samples: " + this.getnSamples() + ", mean: " + this.getMean();
     }
     
     public int getSumSamples() {

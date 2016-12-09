@@ -16,6 +16,7 @@ import static android.system.Os.remove;
  */
 
 public class AppFileManager {
+    private String fileType = ".csv";
     private String name;
     private FileOutputStream outputStream;
     private Context context;
@@ -39,10 +40,20 @@ public class AppFileManager {
         return (Environment.MEDIA_MOUNTED.equals(state));
     }
 
+    public String nameWithType(){
+        String str = this.name;
+        if(!this.name.contains(this.fileType)) {
+            str += this.fileType;
+        }
+        return str;
+    }
+
     public void write(String data) {
         try {
+            String nameToWrite = nameWithType();
+
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
-                    context.openFileOutput(this.name, Context.MODE_PRIVATE));
+                    context.openFileOutput(nameToWrite, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
             IO.print(this, "wrote with sucess the file " + this.name);
@@ -62,8 +73,11 @@ public class AppFileManager {
         // read files
         ArrayList<String> results = new ArrayList<String>();
         for(File file: files) {
-            this.name = (file.getName());
-            results.add(read());
+            if(formatIsCSV(file)) {
+                IO.print("NAME===" + file.getName());
+                this.name = (file.getName());
+                results.add(read());
+            }
         }
         return results;
     }
@@ -76,17 +90,24 @@ public class AppFileManager {
 
         boolean deleted = true;
         for(File file: files){
-            IO.print("deleting " + file.getName());
-            deleted = file.delete() && deleted;
+            if(formatIsCSV(file)) {
+                IO.print("deleting " + file.getName());
+                deleted = file.delete() && deleted;
+            }
         }
         return deleted;
+    }
+
+    public boolean formatIsCSV(File file){
+        return file.getName().contains(fileType);
     }
 
     public String read() {
         String ret = "";
         try {
-            InputStream inputStream = context.openFileInput(this.name);
-            IO.print("reading from " + context.getFilesDir().getAbsolutePath());
+            String nameToRead = nameWithType();
+            InputStream inputStream = context.openFileInput(nameToRead);
+            IO.print("reading from " + nameToRead);
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
