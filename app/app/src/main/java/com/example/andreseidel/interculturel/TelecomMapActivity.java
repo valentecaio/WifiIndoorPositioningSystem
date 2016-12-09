@@ -118,7 +118,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
 
         if(b != null) {
             LatLng locationLatLng = b.getCenter();
-            mMap.addMarker(new MarkerOptions().position(locationLatLng).title("Where you are"));
+            mMap.addMarker(new MarkerOptions().position(locationLatLng).title("You are here"));
         }
         else{
             mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location"));
