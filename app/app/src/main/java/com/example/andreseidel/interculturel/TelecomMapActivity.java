@@ -1,5 +1,6 @@
 package com.example.andreseidel.interculturel;
 
+import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -49,6 +50,8 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
         buildings = new ArrayList<Building>();
         createBuildings(buildings);
+        mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
 
     }
 
@@ -124,6 +127,12 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         buildings.add(b011);
         Building b01port = new Building("B01-PORT1", new LatLng(48.358423, -4.570288));
         buildings.add(b01port);
+        Building d03port1 = new Building("D03-PORT1", new LatLng(48.358621, -4.570770));
+        buildings.add(d03port1);
+        Building b03port1 = new Building("B03-PORT1", new LatLng(48.358507, -4.570714));
+        buildings.add(b03port1);
+
+
     }
 
     /**
@@ -145,25 +154,27 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         float zoomLevel = 17; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(telecom, zoomLevel));
 
-        Test t = new Test();
-        List<String> way = t.test();
-        IO.print(way.toString());
+        Room location = findYourself();
 
-        showBuildingsInOrder(way);
+        if(location != null) {
+            IO.print(location.getName());
+            Test t = new Test();
+            List<String> way = t.test(location.getName());
+            IO.print(way.toString());
 
-       /*Room location = findYourself();
+            showBuildingsInOrder(way);
 
-        IO.print(location.getName());
+            IO.print(location.getName());
 
-        Building b = getBuildingFromName(location.getName());
+            Building b = getBuildingFromName(location.getName());
 
-        if(b != null) {
-            LatLng locationLatLng = b.getCenter();
-            mMap.addMarker(new MarkerOptions().position(locationLatLng).title("You are here"));
+            if (b != null) {
+                LatLng locationLatLng = b.getCenter();
+                mMap.addMarker(new MarkerOptions().position(locationLatLng).title("You are here"));
+            } else {
+                mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location"));
+            }
         }
-        else{
-            mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location"));
-        }*/
     }
 
     public Building getBuildingFromName(String name){
