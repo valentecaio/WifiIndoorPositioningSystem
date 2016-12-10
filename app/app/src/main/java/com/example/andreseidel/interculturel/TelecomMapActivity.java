@@ -42,6 +42,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
     private List<Building> buildings;
     WifiManager mgr;
     WifiInfo info;
+    List <Polyline> polylines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,79 +55,43 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         buildings = new ArrayList<Building>();
         mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
-
+        polylines = new ArrayList<Polyline>();
     }
 
     private void createBuildings(List<Building> buildings) {
-        PolygonOptions b1 = new PolygonOptions().add(new LatLng(48.358642, -4.570442))
-                                            .add(new LatLng(48.358753, -4.570022))
-                                            .add(new LatLng(48.358543, -4.569875))
-                                            .add(new LatLng(48.358423, -4.570286))
-                                            .add(new LatLng(48.358642, -4.570442));
-        b1.fillColor(0);
-        Building b01 = new Building("B01", b1, new LatLng(48.358555, -4.570028));
+        Building b01 = new Building("B01", new LatLng(48.358555, -4.570028));
         buildings.add(b01);
         mMap.addMarker(new MarkerOptions().position(b01.getCenter()).title(b01.getName()));
 
-        PolygonOptions b3 = new PolygonOptions().add(new LatLng(48.358565, -4.570389))
-                                                    .add(new LatLng(48.358434, -4.570300))
-                                                    .add(new LatLng(48.358314, -4.570740))
-                                                    .add(new LatLng(48.358439, -4.570827))
-                                                    .add(new LatLng(48.358565, -4.570389));
-        b3.fillColor(3332);
-        Building b03 = new Building("B03", b3, new LatLng(48.358442, -4.570535));
+        Building b03 = new Building("B03", new LatLng(48.358442, -4.570535));
         buildings.add(b03);
         mMap.addMarker(new MarkerOptions().position(b03.getCenter()).title(b03.getName()));
 
-        PolygonOptions a1 = new PolygonOptions().add(new LatLng(48.359213, -4.570206))
-                                                .add(new LatLng(48.359346, -4.569758))
-                                                .add(new LatLng(48.359241, -4.569681))
-                                                .add(new LatLng(48.359112, -4.570138))
-                                                .add(new LatLng(48.359213, -4.570206));
-        a1.fillColor(3332);
-        Building a01 = new Building("A01", a1, new LatLng(48.359184, -4.570039));
+        Building a01 = new Building("A01", new LatLng(48.359184, -4.570039));
         buildings.add(a01);
         mMap.addMarker(new MarkerOptions().position(a01.getCenter()).title(a01.getName()));
 
-        PolygonOptions e1 = new PolygonOptions().add(new LatLng(48.358921, -4.570316))
-                                                .add(new LatLng(48.359108, -4.569686))
-                                                .add(new LatLng(48.358937, -4.569620))
-                                                .add(new LatLng(48.358761, -4.570201))
-                                                .add(new LatLng(48.358921, -4.570316));
-        e1.fillColor(3332);
-        Building e01 = new Building("E01", e1, new LatLng(48.358955, -4.569901));
+        Building e01 = new Building("E01", new LatLng(48.358955, -4.569901));
         buildings.add(e01);
         mMap.addMarker(new MarkerOptions().position(e01.getCenter()).title(e01.getName()));
 
-        PolygonOptions d3 = new PolygonOptions().add(new LatLng(48.358974, -4.571230))
-                                                .add(new LatLng(48.359013, -4.571090))
-                                                .add(new LatLng(48.358620, -4.570814))
-                                                .add(new LatLng(48.358574, -4.570960))
-                                                .add(new LatLng(48.358974, -4.571230));
-        d3.fillColor(3332);
-        Building d03 = new Building("D03", d3, new LatLng(48.358655, -4.570931));
+        Building d03 = new Building("D03", new LatLng(48.358655, -4.570931));
         buildings.add(d03);
         mMap.addMarker(new MarkerOptions().position(d03.getCenter()).title(d03.getName()));
 
-
+/*
         PolygonOptions d1 = new PolygonOptions().add(new LatLng(48.359193, -4.571061))
                                                 .add(new LatLng(48.359289, -4.570750))
                                                 .add(new LatLng(48.359018, -4.570571))
                                                 .add(new LatLng(48.358933, -4.570880))
                                                 .add(new LatLng(48.359193, -4.571061));
         d1.fillColor(3332);
-        Building d01 = new Building("D01", d1, new LatLng(48.359107, -4.570807));
+*/
+        Building d01 = new Building("D01", new LatLng(48.359107, -4.570807));
         buildings.add(d01);
         mMap.addMarker(new MarkerOptions().position(d01.getCenter()).title(d01.getName()));
 
-        PolygonOptions d2 = new PolygonOptions().add(new LatLng(48.359288, -4.570745))
-                                                .add(new LatLng(48.359403, -4.570349))
-                                                .add(new LatLng(48.359080, -4.570114))
-                                                .add(new LatLng(48.359006, -4.570356))
-                                                .add(new LatLng(48.359207, -4.570500))
-                                                .add(new LatLng(48.359288, -4.570745));
-        d1.fillColor(3332);
-        Building d02 = new Building("D02", d2, new LatLng(48.359110, -4.570296));
+        Building d02 = new Building("D02", new LatLng(48.359110, -4.570296));
         buildings.add(d02);
         mMap.addMarker(new MarkerOptions().position(d02.getCenter()).title(d02.getName()));
 
@@ -285,6 +250,10 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
             @Override
             public void onInfoWindowClick(Marker marker) {
 
+                refreshMap();
+
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
                 String destination = marker.getTitle();
 
                 Room location = findYourself();
@@ -341,7 +310,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                 }
             }
         }
-        mMap.addPolyline(route);
+        polylines.add(mMap.addPolyline(route));
     }
 
     public Room findYourself(){
@@ -379,5 +348,11 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
             i++;
         }
         return mostProbable;
+    }
+
+    public void refreshMap(){
+        for(Polyline p : polylines){
+            p.remove();
+        }
     }
 }
