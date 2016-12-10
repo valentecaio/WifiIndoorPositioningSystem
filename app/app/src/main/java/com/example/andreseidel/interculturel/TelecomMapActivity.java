@@ -43,6 +43,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
     WifiManager mgr;
     WifiInfo info;
     List <Polyline> polylines;
+    List <Marker> markers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,28 +57,30 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
         polylines = new ArrayList<Polyline>();
+        markers = new ArrayList<Marker>();
+
     }
 
     private void createBuildings(List<Building> buildings) {
         Building b01 = new Building("B01", new LatLng(48.358555, -4.570028));
         buildings.add(b01);
-        mMap.addMarker(new MarkerOptions().position(b01.getCenter()).title(b01.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(b01.getCenter()).title(b01.getName())));
 
         Building b03 = new Building("B03", new LatLng(48.358442, -4.570535));
         buildings.add(b03);
-        mMap.addMarker(new MarkerOptions().position(b03.getCenter()).title(b03.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(b03.getCenter()).title(b03.getName())));
 
         Building a01 = new Building("A01", new LatLng(48.359184, -4.570039));
         buildings.add(a01);
-        mMap.addMarker(new MarkerOptions().position(a01.getCenter()).title(a01.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(a01.getCenter()).title(a01.getName())));
 
         Building e01 = new Building("E01", new LatLng(48.358955, -4.569901));
         buildings.add(e01);
-        mMap.addMarker(new MarkerOptions().position(e01.getCenter()).title(e01.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(e01.getCenter()).title(e01.getName())));
 
         Building d03 = new Building("D03", new LatLng(48.358655, -4.570931));
         buildings.add(d03);
-        mMap.addMarker(new MarkerOptions().position(d03.getCenter()).title(d03.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(d03.getCenter()).title(d03.getName())));
 
 /*
         PolygonOptions d1 = new PolygonOptions().add(new LatLng(48.359193, -4.571061))
@@ -89,11 +92,11 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
 */
         Building d01 = new Building("D01", new LatLng(48.359107, -4.570807));
         buildings.add(d01);
-        mMap.addMarker(new MarkerOptions().position(d01.getCenter()).title(d01.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(d01.getCenter()).title(d01.getName())));
 
         Building d02 = new Building("D02", new LatLng(48.359110, -4.570296));
         buildings.add(d02);
-        mMap.addMarker(new MarkerOptions().position(d02.getCenter()).title(d02.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(d02.getCenter()).title(d02.getName())));
 
         Building e011 = new Building("E01-1", new LatLng(48.358862, -4.570178));
         buildings.add(e011);
@@ -111,49 +114,49 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         buildings.add(a01port1);
         Building b02 = new Building("B02", new LatLng(48.358731, -4.570634));
         buildings.add(b02);
-        mMap.addMarker(new MarkerOptions().position(b02.getCenter()).title(b02.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(b02.getCenter()).title(b02.getName())));
 
         Building b021 = new Building("B02-1", new LatLng(48.358646, -4.570444));
         buildings.add(b021);
         Building b04 = new Building("B04", new LatLng(48.358324, -4.569955));
         buildings.add(b04);
-        mMap.addMarker(new MarkerOptions().position(b04.getCenter()).title(b04.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(b04.getCenter()).title(b04.getName())));
 
         Building b04port1 = new Building("B04-PORT1", new LatLng(48.358301, -4.570234));
         buildings.add(b04port1);
         Building c01 = new Building("c01", new LatLng(48.359361, -4.569059));
         buildings.add(c01);
-        mMap.addMarker(new MarkerOptions().position(c01.getCenter()).title(c01.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(c01.getCenter()).title(c01.getName())));
 
         Building c011 = new Building("C01-1", new LatLng(48.359169, -4.568922));
         buildings.add(c011);
         Building c02 = new Building("C02", new LatLng(48.359408, -4.569336));
         buildings.add(c02);
-        mMap.addMarker(new MarkerOptions().position(c02.getCenter()).title(c02.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(c02.getCenter()).title(c02.getName())));
 
         Building c021 = new Building("C02-1", new LatLng(48.359465, -4.569129));
         buildings.add(c021);
         Building c03 = new Building("C03", new LatLng(48.359483, -4.569724));
         buildings.add(c03);
-        mMap.addMarker(new MarkerOptions().position(c03.getCenter()).title(c03.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(c03.getCenter()).title(c03.getName())));
 
         Building c04 = new Building("C04", new LatLng(48.359214, -4.569528));
         buildings.add(c04);
-        mMap.addMarker(new MarkerOptions().position(c04.getCenter()).title(c04.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(c04.getCenter()).title(c04.getName())));
 
         Building c05 = new Building("C05", new LatLng(48.358880, -4.569317));
         buildings.add(c05);
-        mMap.addMarker(new MarkerOptions().position(c05.getCenter()).title(c05.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(c05.getCenter()).title(c05.getName())));
 
         Building c06 = new Building("C06", new LatLng(48.359079, -4.569211));
         buildings.add(c06);
-        mMap.addMarker(new MarkerOptions().position(c06.getCenter()).title(c06.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(c06.getCenter()).title(c06.getName())));
 
         Building c061 = new Building("C06-1", new LatLng(48.359029, -4.569388));
         buildings.add(c061);
         Building c07 = new Building("C07", new LatLng(48.359050, -4.569601));
         buildings.add(c07);
-        mMap.addMarker(new MarkerOptions().position(c07.getCenter()).title(c07.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(c07.getCenter()).title(c07.getName())));
 
         Building c071 = new Building("C07-1", new LatLng(48.359089, -4.569456));
         buildings.add(c071);
@@ -163,7 +166,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         buildings.add(d021);
         Building h01 = new Building("H01", new LatLng(48.358022, -4.569102));
         buildings.add(h01);
-        mMap.addMarker(new MarkerOptions().position(h01.getCenter()).title(h01.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(h01.getCenter()).title(h01.getName())));
 
         Building h011 = new Building("H01-1", new LatLng(48.357968, -4.569278));
         buildings.add(h011);
@@ -171,7 +174,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         buildings.add(h01port1);
         Building h02 = new Building("H02", new LatLng(48.357921, -4.569506));
         buildings.add(h02);
-        mMap.addMarker(new MarkerOptions().position(h02.getCenter()).title(h02.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(h02.getCenter()).title(h02.getName())));
 
         Building b03port2 = new Building("B03-PORT2", new LatLng(48.358359, -4.570622));
         buildings.add(b03port2);
@@ -203,12 +206,12 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         buildings.add(i08port1);
         Building rak = new Building("RAK", new LatLng(48.360229, -4.571922));
         buildings.add(rak);
-        mMap.addMarker(new MarkerOptions().position(rak.getCenter()).title(rak.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(rak.getCenter()).title(rak.getName())));
 
         Building i08 = new Building("I08", new LatLng(48.356573, -4.570339));
         buildings.add(i08);
 
-        mMap.addMarker(new MarkerOptions().position(i08.getCenter()).title(i08.getName()));
+        markers.add(mMap.addMarker(new MarkerOptions().position(i08.getCenter()).title(i08.getName())));
 
         Building p0 = new Building("Point0", new LatLng(48.358501, -4.571803));
         buildings.add(p0);
@@ -239,7 +242,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
 
         // Add a marker in Sydney and move the camera
         final LatLng telecom = new LatLng(48.358613, -4.570223);
-        //mMap.addMarker(new MarkerOptions().position(telecom).title("Marker in telecom"));
+        //markers.add(mMap.addMarker(new MarkerOptions().position(telecom).title("Marker in telecom"));
         float zoomLevel = 17; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(telecom, zoomLevel));
 
@@ -274,9 +277,9 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                     if (b != null) {
                         LatLng locationLatLng = b.getCenter();
 
-                        mMap.addMarker(new MarkerOptions().position(locationLatLng).snippet("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                        markers.add(mMap.addMarker(new MarkerOptions().position(locationLatLng).snippet("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
                     } else {
-                        mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location"));
+                        markers.add(mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location")));
                     }
                 }
             }
@@ -302,9 +305,8 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                 if(b.getName().equals(name)){
                     if(b.getBoarders() != null) {
                         b.getBoarders().visible(true);
-                        mMap.addPolygon(b.getBoarders());
                     }
-                    //mMap.addMarker(new MarkerOptions().position(b.getCenter()).title(b.getName() + " " + i));
+                    //markers.add(mMap.addMarker(new MarkerOptions().position(b.getCenter()).title(b.getName() + " " + i));
                     route.add(b.getCenter());
                     i++;
                 }
@@ -353,6 +355,9 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
     public void refreshMap(){
         for(Polyline p : polylines){
             p.remove();
+        }
+        for(Marker m : markers){
+            m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         }
     }
 }
