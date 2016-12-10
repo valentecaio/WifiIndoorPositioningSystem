@@ -1,5 +1,7 @@
 package Dijkstra.test;
 
+import com.example.andreseidel.interculturel.IO;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -20,7 +22,7 @@ public class Test {
 
 	@org.junit.Test
     public void Test(){}
-	public List<String> test(String departure) {
+	public List<String> test(String departure, String destination) {
 
 		nodes = new ArrayList<Vertex>();
 		edges = new ArrayList<Edge>();
@@ -37,8 +39,8 @@ public class Test {
 				"C03", "C04", "C05", "C06", "C06-1", "C07", "C07-1", "D01", "D01-1", "D01-PORT1", "D02", "D02-1", "D03",
 				"D03-1", "D03-PORT1", "E01", "E01-1", "F01", "H01", "H01-PORT1", "H02", "I01-PORT1", "I01-PORT2", "I02",
 				"I03-PORT1", "I03-PORT2", "I03-PORT3", "I04-PORT1", "I04-PORT2", "I04-PORT3", "I05", "I06", "I07-PORT1",
-				"I07-PORT2", "I08", "I09", "I10", "I11", "I12", "J01", "J02", "J03", "K01", "Point1", "Point2",
-				"Point3", "Point4", "Point5", "Point6" };
+				"I07-PORT2", "I08", "I09", "I10", "I11", "I12", "J01", "J02", "J03", "K01", "Point0", "Point1", "Point2",
+				"Point3", "Point4", "Point5", "Point6", "Point7", "Point8", "Point9" };
 
 		dictionary.addAll(Arrays.asList(points));
 
@@ -172,6 +174,17 @@ public class Test {
 		addBidirectionalLane("Edge_67", dictionary.indexOf("I02"), dictionary.indexOf("B01-PORT1"), 40);
 		addBidirectionalLane("Edge_68", dictionary.indexOf("I02"), dictionary.indexOf("B04-PORT1"), 47);
 
+        // Between RAK and next point
+        addBidirectionalLane("Edge_69", dictionary.indexOf("Point0"), dictionary.indexOf("RAK"), 100);
+        addBidirectionalLane("Edge_70", dictionary.indexOf("Point7"), dictionary.indexOf("RAK"), 70);
+        addBidirectionalLane("Edge_71", dictionary.indexOf("Point8"), dictionary.indexOf("RAK"), 50);
+        addBidirectionalLane("Edge_72", dictionary.indexOf("Point8"), dictionary.indexOf("Point9"), 50);
+        addBidirectionalLane("Edge_73", dictionary.indexOf("Point9"), dictionary.indexOf("A01-PORT1"), 50);
+        addBidirectionalLane("Edge_74", dictionary.indexOf("Point9"), dictionary.indexOf("Point7"), 70);
+        addBidirectionalLane("Edge_75", dictionary.indexOf("Point0"), dictionary.indexOf("Point7"), 70);
+        addBidirectionalLane("Edge_76", dictionary.indexOf("D03"), dictionary.indexOf("Point7"), 70);
+        addBidirectionalLane("Edge_76", dictionary.indexOf("Point3"), dictionary.indexOf("Point7"), 100);
+
 		/*/ get user input
 		System.out.println("Enter your departure: ");
 		Scanner scanner = new Scanner(System.in);
@@ -182,7 +195,8 @@ public class Test {
 		String destination = scanner1.nextLine().toUpperCase();
         */
        // String departure = "A01";
-        String destination = "B03";
+        IO.print(departure + " ===================");
+
 		// get index
 		int point1 = dictionary.indexOf(departure);
 		int point2 = dictionary.indexOf(destination);
