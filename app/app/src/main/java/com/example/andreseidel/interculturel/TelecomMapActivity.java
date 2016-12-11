@@ -248,11 +248,9 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                 String destination = marker.getTitle();
 
                 Room location = findYourself();
-                IO.print(location.getName() + " =====================================\n\n\n\n\n");
 
                 if(location != null) {
                     try{
-                        IO.print(location.getName() + " =====================================\n\n\n\n\n");
                         Test t = new Test();
                         List<String> way = t.test(location.getName(), destination);
                         IO.print(way.toString());
@@ -270,7 +268,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                         } else {
                             markers.add(mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location")));
                         }
-                    }catch(DepartureEqualsDestination d){
+                    } catch(DepartureEqualsDestination d){
                     } catch(PathNotFound p){}
 
                 }

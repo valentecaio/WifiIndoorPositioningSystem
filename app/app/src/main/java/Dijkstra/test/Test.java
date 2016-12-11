@@ -199,7 +199,6 @@ public class Test {
 		String destination = scanner1.nextLine().toUpperCase();
         */
        // String departure = "A01";
-        IO.print(departure + " ===================");
 
 		// get index
 		int point1 = dictionary.indexOf(departure);
@@ -213,8 +212,8 @@ public class Test {
 		dijkstra.execute(nodes.get(point1));
 		LinkedList<Vertex> path = dijkstra.getPath(nodes.get(point2));
 
-		assertNotNull(path);
-		assertTrue(path.size() > 0);
+		if(path == null)
+			throw new PathNotFound();
 
 		List<String> pathString = new ArrayList<String>();
 		for (Vertex vertex : path) {
