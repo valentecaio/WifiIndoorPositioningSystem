@@ -69,4 +69,18 @@ public class Room implements Serializable{
         return str;
     }
 
+    public String getRoutersAsString(){
+        String str = "";
+        boolean first = true;
+        for(RouterInRoom r: this.routers){
+            if(first) {
+                str += r.toString();
+                first = false;
+            } else {
+                str += "\n" + r.toString();
+            }
+        }
+        return str;
+    }
+
 }

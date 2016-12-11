@@ -47,13 +47,14 @@ public class wifiDataAdapter extends BaseAdapter {
 
         // get elements from xml
         TextView titleTextView = (TextView) rowView.findViewById(R.id.room_data_list_title);
-        TextView subtitleTextView = (TextView) rowView.findViewById(R.id.room_data_list_subtitle);
         TextView detailTextView = (TextView) rowView.findViewById(R.id.room_data_list_detail);
 
         Room room = (Room) getItem(position);
+
         titleTextView.setText(room.getName());
-        subtitleTextView.setText("");
-        detailTextView.setText(room.getRouters().toString());
+        //titleTextView.setTextAlignment(1);
+
+        detailTextView.setText(room.getRoutersAsString());
 
         return rowView;
     }
