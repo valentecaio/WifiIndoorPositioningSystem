@@ -1,23 +1,24 @@
 package com.example.andreseidel.interculturel;
 
-        import java.util.List;
-        import android.annotation.SuppressLint;
-        import android.app.Activity;
-        import android.content.BroadcastReceiver;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.content.IntentFilter;
-        import android.net.wifi.ScanResult;
-        import android.net.wifi.WifiManager;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.TextView;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+import java.util.List;
 
 public class CheckWifiNetworkActivity extends Activity {
 
     private StringBuilder sb = new StringBuilder();
     private TextView tv;
-    List<ScanResult> scanList;
+    private List<ScanResult> scanList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

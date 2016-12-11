@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by caio on 09/12/2016.
@@ -55,5 +56,11 @@ public class wifiDataAdapter extends BaseAdapter {
         detailTextView.setText(room.getRouters().toString());
 
         return rowView;
+    }
+
+    public void updateRoomsList(List<Room> newlist) {
+        this.mDataSource.clear();
+        this.mDataSource.addAll(newlist);
+        this.notifyDataSetChanged();
     }
 }

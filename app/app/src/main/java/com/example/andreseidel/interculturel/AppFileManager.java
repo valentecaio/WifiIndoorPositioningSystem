@@ -1,15 +1,18 @@
 package com.example.andreseidel.interculturel;
+
 import android.content.Context;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.List;
-
-import java.io.*;
-
-import static android.system.Os.remove;
 
 /**
  * Created by caio on 08/12/2016.
@@ -34,10 +37,12 @@ public class AppFileManager {
         this.name = filename;
     }
 
-    /* Checks if external storage is available for read and write */
-    public boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-        return (Environment.MEDIA_MOUNTED.equals(state));
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String nameWithType(){
@@ -74,7 +79,6 @@ public class AppFileManager {
         ArrayList<String> results = new ArrayList<String>();
         for(File file: files) {
             if(formatIsCSV(file)) {
-                IO.print("NAME===" + file.getName());
                 this.name = (file.getName());
                 results.add(read());
             }
@@ -93,6 +97,23 @@ public class AppFileManager {
             if(formatIsCSV(file)) {
                 IO.print("deleting " + file.getName());
                 deleted = file.delete() && deleted;
+            }
+        }
+        return deleted;
+    }
+
+    public boolean deleteFile(){
+        String path = this.context.getFilesDir().getAbsolutePath();
+        IO.print("Path: " + path);
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+
+        boolean deleted = true;
+        for(File file: files){
+            String nameToDelete = nameWithType();
+            if(nameToDelete.equals(file.getName()) && formatIsCSV(file)) {
+                IO.print("deleting " + file.getName());
+                deleted = file.delete();
             }
         }
         return deleted;
@@ -160,4 +181,5 @@ public class AppFileManager {
         }
         return rooms;
     }
+
 }

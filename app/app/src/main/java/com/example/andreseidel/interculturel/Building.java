@@ -2,8 +2,6 @@ package com.example.andreseidel.interculturel;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 /**
  * Created by AndreSeidel on 08/12/16.

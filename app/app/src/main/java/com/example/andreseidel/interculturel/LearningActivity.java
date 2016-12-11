@@ -1,18 +1,14 @@
 package com.example.andreseidel.interculturel;
 
-import android.net.Uri;
+import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.content.Context;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LearningActivity extends AppCompatActivity {
     WifiManager mgr;
