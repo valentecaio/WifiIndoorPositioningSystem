@@ -263,24 +263,28 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                 IO.print(location.getName() + " =====================================\n\n\n\n\n");
 
                 if(location != null) {
-                    IO.print(location.getName() + " =====================================\n\n\n\n\n");
-                    Test t = new Test();
-                    List<String> way = t.test(location.getName(), destination);
-                    IO.print(way.toString());
+                    try{
+                        IO.print(location.getName() + " =====================================\n\n\n\n\n");
+                        Test t = new Test();
+                        List<String> way = t.test(location.getName(), destination);
+                        IO.print(way.toString());
 
-                    showBuildingsInOrder(way);
+                        showBuildingsInOrder(way);
 
-                    IO.print(location.getName());
+                        IO.print(location.getName());
 
-                    Building b = getBuildingFromName(location.getName());
+                        Building b = getBuildingFromName(location.getName());
 
-                    if (b != null) {
-                        LatLng locationLatLng = b.getCenter();
+                        if (b != null) {
+                            LatLng locationLatLng = b.getCenter();
 
-                        markers.add(mMap.addMarker(new MarkerOptions().position(locationLatLng).snippet("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
-                    } else {
-                        markers.add(mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location")));
-                    }
+                            markers.add(mMap.addMarker(new MarkerOptions().position(locationLatLng).snippet("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
+                        } else {
+                            markers.add(mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location")));
+                        }
+                    }catch(DepartureEqualsDestination d){
+                    } catch(PathNotFound p){}
+
                 }
             }
         });

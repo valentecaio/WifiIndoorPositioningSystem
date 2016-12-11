@@ -1,6 +1,10 @@
 package Dijkstra.test;
 
+import android.graphics.Path;
+
+import com.example.andreseidel.interculturel.DepartureEqualsDestination;
 import com.example.andreseidel.interculturel.IO;
+import com.example.andreseidel.interculturel.PathNotFound;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +26,7 @@ public class Test {
 
 	@org.junit.Test
     public void Test(){}
-	public List<String> test(String departure, String destination) {
+	public List<String> test(String departure, String destination) throws DepartureEqualsDestination, PathNotFound{
 
 		nodes = new ArrayList<Vertex>();
 		edges = new ArrayList<Edge>();
@@ -200,6 +204,8 @@ public class Test {
 		// get index
 		int point1 = dictionary.indexOf(departure);
 		int point2 = dictionary.indexOf(destination);
+		if(departure.equals(destination))
+			throw new DepartureEqualsDestination();
 
 		// Lets check from location nodes to nodes
 		Graph graph = new Graph(nodes, edges);
@@ -215,6 +221,9 @@ public class Test {
 			System.out.println("Nodes " + vertex + " - " + dictionary.get(Integer.valueOf(vertex.getId())));
 			pathString.add(dictionary.get(Integer.valueOf(vertex.getId())));
 		}
+
+		if(pathString == null)
+			throw new PathNotFound();
 
 		return pathString;
 
