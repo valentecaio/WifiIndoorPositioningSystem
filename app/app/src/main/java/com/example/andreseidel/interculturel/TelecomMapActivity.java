@@ -34,17 +34,23 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
     private List <Polyline> polylines;
     private List <Marker> markers;
     private TelecomMapActivity thisActivity = this;
+    private Room location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telecom_map);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         buildings = new ArrayList<Building>();
+
+        // gets wifi manager before find the location
         mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        // finds location when open the map
+        this.location = findYourself();
 
         polylines = new ArrayList<Polyline>();
         markers = new ArrayList<Marker>();
@@ -114,7 +120,7 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
 
         Building b04port1 = new Building("B04-PORT1", new LatLng(48.358301, -4.570234));
         buildings.add(b04port1);
-        Building c01 = new Building("c01", new LatLng(48.359361, -4.569059));
+        Building c01 = new Building("C01", new LatLng(48.359361, -4.569059));
         buildings.add(c01);
         markers.add(mMap.addMarker(new MarkerOptions().position(c01.getCenter()).title(c01.getName())));
 
@@ -212,9 +218,6 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         Building p9 = new Building("Point9", new LatLng(48.359560, -4.570132));
         buildings.add(p9);
 
-
-
-
     }
 
     /**
@@ -236,8 +239,12 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         float zoomLevel = 17; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(telecom, zoomLevel));
 
-
+        // generate buildings
         createBuildings(buildings);
+
+        // marker to your position is always green
+        Marker actualPosition = findMarkerByName(this.location.getName());
+        actualPosition.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
         mMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
             @Override
@@ -248,8 +255,6 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                 marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
                 String destination = marker.getTitle();
-
-                Room location = findYourself();
 
                 if(location != null) {
                     try{
@@ -265,10 +270,11 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
 
                         if (b != null) {
                             LatLng locationLatLng = b.getCenter();
-
-                            markers.add(mMap.addMarker(new MarkerOptions().position(locationLatLng).snippet("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
-                        } else {
-                            markers.add(mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location")));
+                            /*
+                            markers.add(mMap.addMarker(new MarkerOptions().position(locationLatLng)
+                                    .title("You are here")
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+                                    */
                         }
                     } catch(DepartureEqualsDestination d){
                         new AlertDialog.Builder(thisActivity)
@@ -289,7 +295,6 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                 }
             }
         });
-
 
     }
 
@@ -364,5 +369,13 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         for(Marker m : markers){
             m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         }
+    }
+
+    public Marker findMarkerByName(String title){
+        for(Marker marker: this.markers){
+            if(marker.getTitle().equals(title))
+                return marker;
+        }
+        return null;
     }
 }
