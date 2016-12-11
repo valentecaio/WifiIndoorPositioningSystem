@@ -21,26 +21,6 @@
         android:id="@+id/roomName" />
 
     <Button
-        android:text="See statistics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/getStats"
-        android:onClick="getStats"
-        android:layout_below="@+id/roomName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="107dp" />
-
-    <Button
-        android:text="Gen statistics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/setStats"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/getStats"
-        android:layout_alignStart="@+id/getStats"
-        android:onClick="setStats" />
-
-    <Button
         android:text="Find your way!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,5 +30,36 @@
         android:layout_alignLeft="@+id/setStats"
         android:layout_alignStart="@+id/setStats"
         android:onClick="getMap" />
+
+    <Button
+        android:text="See statistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/getStats"
+        android:onClick="getStats"
+        android:layout_marginTop="63dp"
+        android:layout_below="@+id/roomName"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Gen statistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/setStats"
+        android:onClick="setStats"
+        android:layout_below="@+id/getStats"
+        android:layout_alignLeft="@+id/getStats"
+        android:layout_alignStart="@+id/getStats"
+        android:layout_marginTop="52dp" />
+
+    <Button
+        android:text="EXPORT DATA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/getMap"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp"
+        android:id="@+id/export_button"
+        android:onClick="exportData" />
 
 </RelativeLayout>
