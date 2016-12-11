@@ -1,5 +1,6 @@
 package com.example.andreseidel.interculturel;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -28,10 +29,11 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
 
     private GoogleMap mMap;
     private List<Building> buildings;
-    WifiManager mgr;
-    WifiInfo info;
-    List <Polyline> polylines;
-    List <Marker> markers;
+    private WifiManager mgr;
+    private WifiInfo info;
+    private List <Polyline> polylines;
+    private List <Marker> markers;
+    private TelecomMapActivity thisActivity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -269,7 +271,20 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
                             markers.add(mMap.addMarker(new MarkerOptions().position(telecom).title("Couldnt find your location")));
                         }
                     } catch(DepartureEqualsDestination d){
-                    } catch(PathNotFound p){}
+                        new AlertDialog.Builder(thisActivity)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setTitle("Destination and initial points are the same.")
+                                .setMessage("You're already in the destination.")
+                                .setNegativeButton("Ok", null)
+                                .show();
+                    } catch(PathNotFound p){
+                        new AlertDialog.Builder(thisActivity)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setTitle("No paths to this place.")
+                                .setMessage("Please choose another destination.")
+                                .setNegativeButton("Ok", null)
+                                .show();
+                    }
 
                 }
             }
