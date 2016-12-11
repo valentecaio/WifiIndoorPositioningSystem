@@ -1,5 +1,6 @@
 package com.example.andreseidel.interculturel;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -48,8 +49,19 @@ public class InitialPageActivity extends AppCompatActivity {
         AppFileManager fileMgr = new AppFileManager(this);
 
         try {
+            // ask permission
             askExportPermission();
-            fileMgr.exportAll("Interculturel");
+
+            // export files
+            String exportedFile = fileMgr.exportAll("Interculturel");
+
+            // confirmation dialog
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Data exported")
+                    .setMessage("Your data was exported to: " + exportedFile)
+                    .setNegativeButton("Ok", null)
+                    .show();
         } catch (IOException e) {
             e.printStackTrace();
         }

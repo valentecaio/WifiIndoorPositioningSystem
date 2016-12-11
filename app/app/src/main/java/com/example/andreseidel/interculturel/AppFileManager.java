@@ -174,7 +174,7 @@ public class AppFileManager {
         return rooms;
     }
 
-    public void exportAll(String outputFilename) throws IOException {
+    public String exportAll(String outputFilename) throws IOException {
         // gets the files to export
         File[] files = this.getFiles();
         ArrayList<String> srcFiles = new ArrayList<String>();
@@ -215,6 +215,7 @@ public class AppFileManager {
         } catch (IOException ioe) {
             IO.print("Error creating zip file: " + ioe);
         }
+        return zipFile;
     }
 
     private File[] getFiles(){
