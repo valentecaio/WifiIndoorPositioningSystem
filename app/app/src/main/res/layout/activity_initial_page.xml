@@ -17,7 +17,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="135dp"
-        android:layout_marginEnd="135dp"
+		android:layout_marginEnd="135dp"
+		android:onClick="onClickTestView"
+		android:clickable="true"
         android:id="@+id/roomName" />
 
     <Button

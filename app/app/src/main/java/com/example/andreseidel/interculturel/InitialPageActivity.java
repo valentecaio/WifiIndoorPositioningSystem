@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.io.IOException;
 
@@ -17,6 +18,7 @@ public class InitialPageActivity extends AppCompatActivity {
     EditText roomName;
     Button getStats;
     Button setStats;
+    int countCristofe = 0;
 
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
@@ -27,6 +29,23 @@ public class InitialPageActivity extends AppCompatActivity {
 
         setStats = (Button) findViewById(R.id.setStats);
         getStats = (Button) findViewById(R.id.getStats);
+    }
+
+    public void onClickTestView(View view){
+        if (countCristofe++ >= 10) {
+            ImageView image = new ImageView(this);
+            image.setImageResource(R.drawable.cristofe);
+            String str = "cristofe trou cul";
+            // confirmation dialog
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setView(image)
+                    .setTitle("-")
+                    .setMessage(str)
+                    .setNegativeButton("Ok", null)
+                    .show();
+            countCristofe = 0;
+        }
     }
 
     public void getStats(View view) {
