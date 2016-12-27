@@ -29,6 +29,13 @@ public class InitialPageActivity extends AppCompatActivity {
 
         setStats = (Button) findViewById(R.id.setStats);
         getStats = (Button) findViewById(R.id.getStats);
+
+        PositionFinder finder = new PositionFinder(this);
+        Room location = finder.findYourself();
+        if (location != null) {
+            this.roomName.setText("you are in: " + location.getName());
+        }
+
     }
 
     public void onClickTestView(View view){
@@ -44,6 +51,7 @@ public class InitialPageActivity extends AppCompatActivity {
                     .setMessage(str)
                     .setNegativeButton("Ok", null)
                     .show();
+            // reset counter
             countCristofe = 0;
         }
     }

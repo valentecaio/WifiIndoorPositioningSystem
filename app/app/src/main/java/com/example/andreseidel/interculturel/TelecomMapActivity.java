@@ -1,9 +1,6 @@
 package com.example.andreseidel.interculturel;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -29,12 +26,10 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
 
     private GoogleMap mMap;
     private List<Building> buildings;
-    private WifiManager mgr;
-    private WifiInfo info;
     private List <Polyline> polylines;
     private List <Marker> markers;
     private TelecomMapActivity thisActivity = this;
-    private Room location;
+    private Room location = new Room("initial room");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +42,9 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
         buildings = new ArrayList<Building>();
 
-        // gets wifi manager before find the location
-        mgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        // finds location when open the map
-        this.location = findYourself();
+        // finds location when opening the map
+        PositionFinder finder = new PositionFinder(this);
+        this.location = finder.findYourself();
 
         polylines = new ArrayList<Polyline>();
         markers = new ArrayList<Marker>();
@@ -323,43 +317,6 @@ public class TelecomMapActivity extends FragmentActivity implements OnMapReadyCa
             }
         }
         polylines.add(mMap.addPolyline(route));
-    }
-
-    public Room findYourself(){
-        AppFileManager fm = new AppFileManager(this);
-
-        List<Room> rooms = fm.readAllRoomsAsArray();
-        info = mgr.getConnectionInfo();
-        String bssid = info.getBSSID();
-        int rssi = info.getRssi();
-
-        List<RouterInRoom> candidates = new ArrayList<RouterInRoom>();
-        List<Integer> candidatesIndexesInRooms = new ArrayList<Integer>();
-        Room mostProbable = null;
-
-        int index = 0;
-        for (Room room : rooms){
-            for(RouterInRoom r : room.getRouters()){
-                if(r.getBssid().equals(bssid)){
-                    candidates.add(r);
-                    candidatesIndexesInRooms.add(index);
-                }
-            }
-            index++;
-        }
-
-        float minDif = 1000;
-        int i = 0;
-
-        for(RouterInRoom candidate : candidates){
-            float dif = rssi - candidate.getMean();
-            if (dif < minDif){
-                minDif = dif;
-                mostProbable = rooms.get(candidatesIndexesInRooms.get(i));
-            }
-            i++;
-        }
-        return mostProbable;
     }
 
     public void refreshMap(){
