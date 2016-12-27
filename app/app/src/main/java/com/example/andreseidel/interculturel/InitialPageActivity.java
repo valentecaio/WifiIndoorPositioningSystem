@@ -35,7 +35,7 @@ public class InitialPageActivity extends AppCompatActivity {
         if (countCristofe++ >= 10) {
             ImageView image = new ImageView(this);
             image.setImageResource(R.drawable.cristofe);
-            String str = "cristofe trou cul";
+            String str = "cristofe trou de cul";
             // confirmation dialog
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
