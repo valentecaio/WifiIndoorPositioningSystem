@@ -4,13 +4,13 @@ It's an Android prototype app written in Java.
 
 This prototype can use an Wi-fi network (with at least two access points) to create an Indoor Positioning System based in Wifi Triangulation.
 
-The ideia is quite similar to GPS Positioning System. The app uses the power of 3 or more Wi-fi access points to determine user current location.
+The ideia is quite similar to GPS Positioning System. The app receives the signal 3 or more Wi-fi access points and uses its powers to calculate user current location.
 
-In the same prototype, user can generate wi-fi statistics, which is needed to determine locations.
+In the same prototype, user can generate wi-fi statistics, which are needed to determine locations.
 
-The app can already export this data gathered by the user (in ics format), and future versions of the app must be able to import this data. This way, users will be able to share their Networks Positioning Systems.
+The app already can export this data gathered by the user (in ics format), and future versions of it must be able to import this data. This way, users will be able to share their Networks Positioning Systems.
 
-I made this app with 2 friends as an one semester project (S3 project) in my bachelor in Telecom Bretagne.
+App made by 3 brazilian friends as an one semester project (S3 project) in Telecom Bretagne master degree.
 
 ## Usage
 
