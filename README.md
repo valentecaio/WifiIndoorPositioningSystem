@@ -22,7 +22,7 @@ How to install app:
 5. Compile and install app in device using Android Studio Tools
 
 How to use app:
-See [Demonstrational video](https://drive.google.com/open?id=0ByN9K502OxFvV3VMQUZJdGxQOTQ).
+See [Demonstrational video](https://drive.google.com/file/d/0ByN9K502OxFvV3VMQUZJdGxQOTQ).
 
 ## Contributing
 
