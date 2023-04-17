@@ -24,6 +24,8 @@ How to install app:
 How to use app:
 See [Demonstrational video](https://drive.google.com/file/d/0ByN9K502OxFvV3VMQUZJdGxQOTQ).
 
+https://drive.google.com/file/d/0ByN9K502OxFvV3VMQUZJdGxQOTQ
+
 ## Contributing
 
 1. Fork it!
