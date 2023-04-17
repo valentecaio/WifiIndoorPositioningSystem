@@ -12,6 +12,10 @@ The app already can export this data gathered by the user (in ics format), and f
 
 App made by 3 brazilian friends as an one semester project (S3 project) in Telecom Bretagne master degree.
 
+## Demo
+
+https://user-images.githubusercontent.com/14484616/232632827-fdb767b8-2772-4cf8-9117-850082f2e860.mp4
+
 ## Usage
 
 How to install app:
@@ -20,11 +24,6 @@ How to install app:
 3. Open project in Android Studio
 4. Add this device to Android Studio Devices
 5. Compile and install app in device using Android Studio Tools
-
-How to use app:
-See [Demonstrational video](https://drive.google.com/file/d/0ByN9K502OxFvV3VMQUZJdGxQOTQ).
-
-https://drive.google.com/file/d/0ByN9K502OxFvV3VMQUZJdGxQOTQ
 
 ## Contributing
 
